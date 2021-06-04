@@ -30,15 +30,15 @@
                                             @foreach($menu->children as $middleChildMenu)
                                                 <div class="col-lg col-12 pt-3 pt-lg-0 d-flex flex-column">
                                                     <div
-                                                        class="d-flex d-lg-inline-block justify-content-between align-items-center mega-menu__title text-md-right">
+                                                            class="d-flex d-lg-inline-block justify-content-between align-items-center mega-menu__title text-md-right">
                                                         <a class="" href="{{ $middleChildMenu->link }}">
                                                             {{ $middleChildMenu->name }}
                                                         </a>
                                                         @if($middleChildMenu->children->count() > 0)
                                                             <button
-                                                                class="btn d-inline-block d-lg-none navbar__item__btn collapsed"
-                                                                data-target="#menu-{{ $middleChildMenu->slug }}"
-                                                                data-toggle="collapse">
+                                                                    class="btn d-inline-block d-lg-none navbar__item__btn collapsed"
+                                                                    data-target="#menu-{{ $middleChildMenu->slug }}"
+                                                                    data-toggle="collapse">
                                                                 <i class="fas fa-angle-up"></i>
                                                             </button>
                                                         @endif
@@ -73,88 +73,19 @@
             <div class="d-flex navbar__search-wrapper align-items-center">
                 <form class="flex-1 search-form" id="searchForm" action="">
                     <div class="navbar__search d-flex align-items-center" id="dropdownMenuButton"
-                         data-toggle="dropdown"
                          aria-haspopup="true" aria-expanded="false">
                         <i class="icon fas fa-search ml-2"></i>
-                        <input class="flex-grow-1" placeholder="جستجو..." name="search" type="text">
-                        <div class="dropdown-menu search-suggestions" aria-labelledby="dropdownMenuButton">
-                            <ul class="">
-                                <li class="d-flex border-bottom p-3">
-                                    <img class="ml-3" src="{{ asset('site/images/3020111430_r01_1.jpg') }}" alt="">
-                                    <div class="d-flex flex-column justify-content-between">
-                                        <a class="search-suggestion">
-                                            جستجوی
-                                            <span class="suggestion-title">لباس</span>
-                                            در دسته بندی
-                                            <span class="suggestion-title">ست نوزادی</span>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="d-flex border-bottom p-3">
-                                    <img class="ml-3" src="{{ asset('site/images/3020111430_r01_1.jpg') }}" alt="">
-                                    <div class="d-flex flex-column justify-content-between">
-                                        <a class="search-suggestion">
-                                            جستجوی
-                                            <span class="suggestion-title">لباس</span>
-                                            در دسته بندی
-                                            <span class="suggestion-title">ست نوزادی</span>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="d-flex border-bottom p-3">
-                                    <img class="ml-3" src="{{ asset('site/images/3020111430_r01_1.jpg') }}" alt="">
-                                    <div class="d-flex flex-column justify-content-between">
-                                        <a class="search-suggestion">
-                                            جستجوی
-                                            <span class="suggestion-title">لباس</span>
-                                            در دسته بندی
-                                            <span class="suggestion-title">ست نوزادی</span>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li class="d-flex border-bottom p-3">
-                                    <img class="ml-3" src="{{ asset('site/images/3020111430_r01_1.jpg') }}" alt="">
-                                    <div class="d-flex flex-column justify-content-between">
-                                        <a class="suggestion-title" href="">
-                                            لورم ایپسوم متن ساختگی
-                                        </a>
-                                        <p class="suggestion-category">
-                                            دسته بندی:
-                                            <a href="">لورم</a>
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="d-flex border-bottom p-3">
-                                    <img class="ml-3" src="{{ asset('site/images/3020111430_r01_1.jpg') }}" alt="">
-                                    <div class="d-flex flex-column justify-content-between">
-                                        <a class="suggestion-title" href="">
-                                            لورم ایپسوم متن ساختگی
-                                        </a>
-                                        <p class="suggestion-category">
-                                            دسته بندی:
-                                            <a href="">لورم</a>
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="d-flex border-bottom p-3">
-                                    <img class="ml-3" src="{{ asset('site/images/3020111430_r01_1.jpg') }}" alt="">
-                                    <div class="d-flex flex-column justify-content-between">
-                                        <a class="suggestion-title" href="">
-                                            لورم ایپسوم متن ساختگی
-                                        </a>
-                                        <p class="suggestion-category">
-                                            دسته بندی:
-                                            <a href="">لورم</a>
-                                        </p>
-                                    </div>
-                                </li>
+                        <input class="flex-grow-1" placeholder="جستجو..." id="siteSearch" name="search" type="text">
+                        <div class="dropdown-menu search-suggestions">
+                            <ul id="searchResponse">
+
                             </ul>
                         </div>
                     </div>
                 </form>
-                <button class="btn wish-list-btn d-none d-md-inline-block" type="button">
+                <a class="btn wish-list-btn d-none d-md-inline-block" href="{{ route('site.dashboard.wishlist') }}">
                     <i class="far fa-heart"></i>
-                </button>
+                </a>
                 <button class="btn d-inline-block d-md-none search-btn" id="openMobileSearch" type="button">
                     <i class="fas fa-search"></i>
                 </button>
@@ -166,3 +97,54 @@
         </div>
     </div>
 </nav>
+
+
+@push('scripts')
+    <script>
+        $(document).ready(function () {
+            $("#siteSearch").keyup(function () {
+                var keyword = this.value;
+
+                if (keyword.length > 2) {
+                    $.get({
+                        url: "/api/search?search=" + keyword,
+                        beforeSend: function () {
+                            $("#loader").addClass('loading');
+                        },
+                        success: function (data) {
+                            $('.search-suggestions').addClass('show');
+                            var  output = '';
+                            var li = '<li class="d-flex border-bottom p-3">' +
+                                '<img class="ml-3" src="$product_image" alt="">' +
+                                '<div class="d-flex flex-column justify-content-between">' +
+                                '<a class="search-suggestion">' +
+                                '<span class="suggestion-title">$product_title</span>' +
+                                '</a>' +
+                                '</div>' +
+                                '</li>';
+                            console.log(data.result)
+                            $.each( data.result, function( key, value ) {
+
+                                li = li.replace("$product_image", value.image.path);
+                                li = li.replace("$product_title", value.product_name);
+                                output += li
+                            });
+
+
+                                $('#searchResponse').html(output);
+                                $("#loader").removeClass('loading');
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            // $('#add_to_cart').css("background-color", "red");
+                            // $('#add_to_cart').text("خطایی رخ داده!!!");
+                            // $('#add_to_cart').prop('disabled', true);
+
+                            $("#loader").removeClass('loading');
+                        }
+                    });
+                }
+
+            });
+        });
+    </script>
+@endpush

@@ -111,7 +111,6 @@ class ProductRepository extends BaseRepository
 //        return $products->forPage($data['page'] ?? 1 ,15);
     }
 
-
     public function featuredProducts()
     {
         return $this->model->newQuery()
@@ -122,5 +121,14 @@ class ProductRepository extends BaseRepository
                 $query->where('quantity', '>', 0);
             })
             ->limit(12)->get();
+    }
+
+    public function search($keyword)
+    {
+        return $this->model
+            ->with('image')
+            ->where('product_name', 'like', "%$keyword%")
+            ->orderBy('updated_at')
+            ->simplePaginate(5)->items();
     }
 }
