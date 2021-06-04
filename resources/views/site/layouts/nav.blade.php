@@ -101,6 +101,10 @@
 
 @push('scripts')
     <script>
+
+        /*
+        * Its your fault, you dont pay the project money than I will use mysql for your search instead of Elasticsearch!!!
+        * */
         $(document).ready(function () {
             $("#siteSearch").keyup(function () {
                 var keyword = this.value;
