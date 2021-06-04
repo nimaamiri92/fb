@@ -34,7 +34,7 @@ class AttributeRepository extends BaseRepository
      * @return Attribute
      * @throws CreateAttributeErrorException
      */
-    public function createAttribute(array $data) : Attribute
+    public function createAttribute(array $data): Attribute
     {
         try {
             $attribute = new Attribute($data);
@@ -60,7 +60,7 @@ class AttributeRepository extends BaseRepository
      * @return bool
      * @throws UpdateAttributeErrorException
      */
-    public function updateAttribute(array $data, Attribute $attribute) : bool
+    public function updateAttribute(array $data, Attribute $attribute): bool
     {
         try {
             return $attribute->update($data);
@@ -72,18 +72,18 @@ class AttributeRepository extends BaseRepository
     /**
      * @return bool|null
      */
-    public function deleteAttribute() : ?bool
+    public function deleteAttribute(): ?bool
     {
         return $this->model->delete();
     }
 
     /**
-     * @param array $columns
+     * @param array  $columns
      * @param string $orderBy
      * @param string $sortBy
      * @return Collection
      */
-    public function listAttributes($columns = array('*'), string $orderBy = 'id', string $sortBy = 'asc') : Collection
+    public function listAttributes($columns = array('*'), string $orderBy = 'id', string $sortBy = 'asc'): Collection
     {
         return $this->all($columns, $orderBy, $sortBy);
     }
@@ -91,7 +91,7 @@ class AttributeRepository extends BaseRepository
     /**
      * @return Collection
      */
-    public function listAttributeValues() : Collection
+    public function listAttributeValues(): Collection
     {
         return $this->model->values()->get();
     }
@@ -104,6 +104,8 @@ class AttributeRepository extends BaseRepository
 
     public function getListOfAttributesWithValues()
     {
-        return $this->model->with('values')->get();
+        return $this->model->with(['values' => function ($query) {
+            $query->where(['is_show' => 1]);
+        }])->get();
     }
 }

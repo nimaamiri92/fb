@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\Attributes\CreateAttributeValuesRequest;
 use App\Models\Attribute;
 use App\Models\AttributeValue;
 use App\Repositories\Admin\AttributeValueRepository;
+use Illuminate\Http\Request;
 
 class AttributeValuesController extends BaseController
 {
@@ -30,12 +31,20 @@ class AttributeValuesController extends BaseController
     {
         $data = $request->validated();
         $this->attributeValueRepository->createAttributeValue($attribute, $data);
-        return redirect()->route('admin.attributes.edit', $attribute->id)->with(['message' => trans('attributevalues.value_added_successfully')]);
+        return redirect()->route('admin.attributes.edit',
+            $attribute->id)->with(['message' => trans('attributevalues.value_added_successfully')]);
     }
 
     public function delete(CreateAttributeValuesRequest $request, Attribute $attribute, AttributeValue $value)
     {
         $this->attributeValueRepository->deleteAttributeValue($value);
-        return redirect()->route('admin.attributes.edit', $attribute->id)->with(['message' => trans('attributevalues.value_removed_successfully')]);
+        return redirect()->route('admin.attributes.edit',
+            $attribute->id)->with(['message' => trans('attributevalues.value_removed_successfully')]);
+    }
+
+    public function activeAttributeValue(AttributeValue $attributeValue, $is_show)
+    {
+        AttributeValue::query()->where('id', $attributeValue->id)->update(['is_show' => $is_show]);
+        return response()->json([]);
     }
 }

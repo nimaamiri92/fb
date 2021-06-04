@@ -53,6 +53,11 @@
                 <div class="card-header">
                     <h3 class="card-title">
                         {{ trans('main.values') }}
+
+                        <a class="btn btn-md btn-info float-left ml-1 mb-2"
+                           href="{{ route('admin.attributevalues.create',['attribute' => $attribute->id]) }}">
+                            {{ trans('attributevalues.add_attribute_value') }}
+                        </a>
                     </h3>
                 </div>
                 <div class="card">
@@ -64,6 +69,7 @@
                                     <th>{{ trans('main.row') }}</th>
                                     <th>{{ trans('product_attribute.value') }}</th>
                                     <th>{{ trans('product_attribute.created_at') }}</th>
+                                    <th>نمایش در سایت</th>
                                     <th>{{ trans('main.delete') }}</th>
                                 </tr>
                                 </thead>
@@ -73,6 +79,7 @@
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $value->value }}</td>
                                         <td>{{ $value->converted_created_at }}</td>
+                                        <td><input v-on:change="openOrder({{ $value->id }},$event)" type="checkbox" @if($value->is_show) checked @endif></td>
                                         <td width="20">
                                             <form
                                                 action="{{ route('admin.attributevalues.delete',['attribute' => $attribute->id,'value' =>$value->id]) }}"
@@ -93,9 +100,9 @@
                     </div>
 
                     <div class="col-md-12">
-                        <a class="btn btn-md btn-info float-left ml-1 mb-2"
+                        <a class="btn btn-md btn-success float-left ml-1 mb-2"
                            href="{{ route('admin.attributevalues.create',['attribute' => $attribute->id]) }}">
-                           {{ trans('attributevalues.add_attribute_value') }}
+                           ذخیره
                         </a>
                     </div>
                 </div>
@@ -103,6 +110,5 @@
         </div>
     </div>
 @endsection()
-
 
 

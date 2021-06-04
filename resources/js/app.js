@@ -13,7 +13,6 @@ import SuiVue from 'semantic-ui-vue';
 import Select2 from 'v-select2-component';
 
 
-
 window.axios.defaults.headers.common = {
     'X-Requested-With': 'XMLHttpRequest',
     'Content-Type': 'application/json',
@@ -43,8 +42,22 @@ Vue.use(SuiVue);
 
 const app = new Vue({
     el: '#app',
-    components:{
+    components: {
         Loading
+    },
+    methods: {
+
+        openOrder(attributeValueId, event) {
+
+            let url = 'attributeValue/' + attributeValueId + '/is_show/' + 0
+            if (event.target.checked) {
+                url = 'attributeValue/' + attributeValueId + '/is_show/' + 1
+            }
+            axios
+                .post(url)
+                .then(response => {});
+
+        },
     }
 });
 
