@@ -109,6 +109,11 @@
             $("#siteSearch").keyup(function () {
                 var keyword = this.value;
 
+                if (keyword.length === 0){
+                    $('.search-suggestions').removeClass('show');
+                }
+
+
                 if (keyword.length > 2) {
                     $.get({
                         url: "/api/search?search=" + keyword,
