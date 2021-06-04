@@ -4,7 +4,7 @@
 <div class="page-content">
     <div class="row pt-5">
         <div class="col-12 col-md-3">
-            @include('site.ZAHRA.profile-sidebar')
+            @include('site.dashboard.profile-sidebar')
         </div>
         <div class="col-12 col-md-9">
             <div class="profile-page">

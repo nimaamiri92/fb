@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Repositories\Site\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,12 +21,25 @@ class UserController extends BaseController
         $this->userRepository = $userRepository;
     }
 
-    public function dashboard()
+    public function index()
     {
         $this->setPageTitle('داشبورد');
-        $this->setCartContent();
-        $user = Auth::user();
-        $dashboardData = $this->userRepository->dashboard($user);
-        return view('site.user.dashboard',compact('dashboardData'));
+        $dashboard = $this->userRepository->dashboard(currentUserObj());
+        return view('site.dashboard.home', compact('dashboard'));
+    }
+
+
+    public function orderHistory()
+    {
+        $this->setPageTitle('تاریخچه سفارشات');
+        $orderHistory = $this->userRepository->userOrderHistory(currentUserObj());
+        return view('site.dashboard.order-history', compact('orderHistory'));
+    }
+
+    public function orderHistoryDetails(Order $order)
+    {
+        $this->setPageTitle('جزیات تاریخچه سفارشات');
+        $orderHistoryDetails = $this->userRepository->userOrderHistoryDetails(currentUserObj(), $order);
+        return view('site.dashboard.order-history-details', compact('orderHistoryDetails'));
     }
 }

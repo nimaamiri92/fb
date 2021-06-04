@@ -3,6 +3,7 @@
 namespace App\Models\Site;
 
 use App\Models\Address;
+use App\Models\Order;
 use App\Traits\SearchTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -102,5 +103,10 @@ class User extends Authenticatable
     public function carts()
     {
         return $this->hasMany(CartItem::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

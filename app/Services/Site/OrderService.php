@@ -96,6 +96,9 @@ class OrderService
         foreach ($listOfProducts as $key => $eachCartItem) {
             $orderItem = new OrderItem();
             $orderItem->quantity = $eachCartItem['quantity'];
+            $orderItem->product_id = $eachCartItem['product_id'];
+            $orderItem->product_image = $eachCartItem['image'];
+            $orderItem->quantity = $eachCartItem['quantity'];
             $orderItem->product_price = $eachCartItem['product_price_discount'];
             $orderItem->product_size = $eachCartItem['product_size'];
             $orderItem->product_name = $eachCartItem['product_name'];

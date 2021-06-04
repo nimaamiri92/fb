@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Eloquent\BaseModel;
 use App\Models\Site\User;
+use App\Traits\PersianDateConvertor;
 
 /**
  * App\Models\Order
@@ -53,6 +54,8 @@ use App\Models\Site\User;
  */
 class Order extends BaseModel
 {
+    use PersianDateConvertor;
+
     const ORDER_STATUS_IN_PROGRESS= 'ORDER_STATUS_IN_PROGRESS';
     const ORDER_STATUS_APPROVED= 'ORDER_STATUS_APPROVED';
     const ORDER_STATUS_REJECTED= 'ORDER_STATUS_REJECTED';
@@ -102,5 +105,10 @@ class Order extends BaseModel
             self::ORDER_STATUS_APPROVED,
             self::ORDER_STATUS_REJECTED,
         ];
+    }
+
+    public function getOrderDateAttribute()
+    {
+        return $this->formatToJalali(__FUNCTION__);
     }
 }

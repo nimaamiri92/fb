@@ -7,6 +7,7 @@ use App\Http\Controllers\Site\CartController;
 use App\Http\Controllers\Site\OrderController;
 use App\Http\Controllers\Site\PaymentController;
 use App\Http\Controllers\Site\ProductController;
+use App\Http\Controllers\Site\UserController;
 use App\Http\Controllers\Site\WishListController;
 use Illuminate\Support\Facades\Route;
 
@@ -72,7 +73,10 @@ Route::group(['middleware' => ['auth:site'], 'as' => 'site.'], function () {
     Route::post('order/store', [OrderController::class, 'createOrderAndGoToGateway'])->name('order.store');
 
 
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.home');
+    Route::get('dashboard', [UserController::class, 'index'])->name('dashboard.home');
+    Route::get('order-history', [UserController::class, 'orderHistory'])->name('dashboard.order-history');
+    Route::get('order-history-details/{order}', [UserController::class, 'orderHistoryDetails'])
+        ->name('dashboard.order-history-details');
 });
 
 
