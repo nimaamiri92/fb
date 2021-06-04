@@ -23,15 +23,14 @@ class WishListController extends BaseController
     public function store(Product $product)
     {
         $this->wishListRepository->addToMyWishList($product);
-        return redirect(route('site.user.wish-list'));
+        return redirect(route('site.dashboard.wishlist'));
     }
 
     public function index()
     {
         $this->setPageTitle('علاقه مندی ها');
         $this->setCartContent();
-        $user = Auth::user();
-        $wishList = $this->wishListRepository->index($user);
-        return view('site.user.wish-list',compact('wishList'));
+        $wishList = $this->wishListRepository->index(currentUserObj());
+        return view('site.dashboard.wish-list',compact('wishList'));
     }
 }

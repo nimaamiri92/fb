@@ -24,6 +24,7 @@ class UserController extends BaseController
     public function index()
     {
         $this->setPageTitle('داشبورد');
+        $this->setCartContent();
         $dashboard = $this->userRepository->dashboard(currentUserObj());
         return view('site.dashboard.home', compact('dashboard'));
     }
@@ -32,6 +33,7 @@ class UserController extends BaseController
     public function orderHistory()
     {
         $this->setPageTitle('تاریخچه سفارشات');
+        $this->setCartContent();
         $orderHistory = $this->userRepository->userOrderHistory(currentUserObj());
         return view('site.dashboard.order-history', compact('orderHistory'));
     }
@@ -39,6 +41,7 @@ class UserController extends BaseController
     public function orderHistoryDetails(Order $order)
     {
         $this->setPageTitle('جزیات تاریخچه سفارشات');
+        $this->setCartContent();
         $orderHistoryDetails = $this->userRepository->userOrderHistoryDetails(currentUserObj(), $order);
         return view('site.dashboard.order-history-details', compact('orderHistoryDetails'));
     }

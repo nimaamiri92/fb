@@ -34,6 +34,6 @@ class WishListRepository extends BaseRepository
 
     public function index(User $user)
     {
-        return $user->load('wishList.product.image');
+        return $user->load('wishlists.product.image');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models\Site;
 
 use App\Models\Address;
 use App\Models\Order;
+use App\Models\WishList;
 use App\Traits\SearchTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -108,5 +109,10 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function wishlists()
+    {
+        return $this->hasMany(WishList::class);
     }
 }

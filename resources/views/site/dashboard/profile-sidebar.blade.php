@@ -11,7 +11,7 @@
             <a class="profile-links" href="{{ route('site.dashboard.order-history') }}">سفارش های من</a>
         </li>
         <li class="text-right mb-3">
-            <a class="profile-links" href="">لیست علاقه مندی ها</a>
+            <a class="profile-links" href="{{ route('site.dashboard.wishlist') }}">لیست علاقه مندی ها</a>
         </li>
         <li class="text-right mb-3">
             <a class="profile-links" href="">آدرس های پستی</a>

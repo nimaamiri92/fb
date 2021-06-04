@@ -55,6 +55,8 @@ Route::group(['as' => 'site.'], function () {
 Route::group(['middleware' => ['auth:site'], 'as' => 'site.'], function () {
     Route::post('/product/{product}/add-to-wish-list',
         [WishListController::class, 'store'])->name('product.add_to_wish_list');
+    Route::get('wishlist', [WishListController::class, 'index'])
+        ->name('dashboard.wishlist');
     Route::group(['prefix' => 'cart'], function () {
         Route::get('show', [CartController::class, 'show'])->name('cart.show');
         Route::group(['prefix' => '{cart}'], function () {
