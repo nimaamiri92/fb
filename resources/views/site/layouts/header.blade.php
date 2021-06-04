@@ -17,7 +17,7 @@
                             </span>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdownMenuButton">
-                            <a class="dropdown-item text-right" href="#">حساب کاربری</a>
+                            <a class="dropdown-item text-right" href="{{ route('site.dashboard.home') }}">حساب کاربری</a>
                             <a class="dropdown-item text-right" href="{{ route('site.logout') }}">خروج</a>
                         </div>
                     </div>

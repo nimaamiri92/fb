@@ -4,6 +4,7 @@
 namespace App\Repositories\Site;
 
 use App\Models\Product;
+use App\Models\Site\User;
 use App\Models\Slider;
 use App\Models\WishList;
 use App\Repositories\BaseRepository;
@@ -19,9 +20,20 @@ class WishListRepository extends BaseRepository
 
     public function addToMyWishList(Product $product)
     {
-        $this->insertOrIgnore([
-            'user_id' => currentUserObj()->id,
-            'product_id' => $product->id
-        ]);
+        $this->model->updateOrInsert(
+            [
+                'user_id' => currentUserObj()->id,
+                'product_id' => $product->id
+            ],
+            [
+                'user_id' => currentUserObj()->id,
+                'product_id' => $product->id
+            ]
+        );
+    }
+
+    public function index(User $user)
+    {
+        return $user->load('wishList.product.image');
     }
 }

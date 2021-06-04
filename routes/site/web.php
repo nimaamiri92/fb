@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Site\AddressController;
 use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Site\CartController;
@@ -35,27 +36,29 @@ Route::get('/resend/{mobile}', 'Auth\RegisterController@resendSms')->name('site.
 // Password Reset Routes...
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLink')->name('password.email');
-Route::get('password/reset/sent-successfully', 'Auth\ForgotPasswordController@sentSuccessfully')->name('password.reset.sentSuccessfully');
+Route::get('password/reset/sent-successfully',
+    'Auth\ForgotPasswordController@sentSuccessfully')->name('password.reset.sentSuccessfully');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.reset.store');
 
 
 Route::group(['as' => 'site.'], function () {
-    Route::get('/', [HomeController::class,'index'])->name('home.index');
-    Route::get('/product/{product}', [ProductController::class,'show'])->name('product.show');
-    Route::get('/product', [ProductController::class,'index'])->name('product.index');
-    Route::post('/product/{product}/add-to-cart', [CartController::class,'addToCart'])->name('cart.add');
+    Route::get('/', [HomeController::class, 'index'])->name('home.index');
+    Route::get('/product/{product}', [ProductController::class, 'show'])->name('product.show');
+    Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+    Route::post('/product/{product}/add-to-cart', [CartController::class, 'addToCart'])->name('cart.add');
     Route::any('payment/callback', [PaymentController::class, 'callbackUrl'])->name('payment.callbackUrl');
 });
 
 
-Route::group(['middleware' => ['auth:site'],'as' => 'site.'], function () {
-    Route::post('/product/{product}/add-to-wish-list', [WishListController::class,'store'])->name('product.add_to_wish_list');
+Route::group(['middleware' => ['auth:site'], 'as' => 'site.'], function () {
+    Route::post('/product/{product}/add-to-wish-list',
+        [WishListController::class, 'store'])->name('product.add_to_wish_list');
     Route::group(['prefix' => 'cart'], function () {
-        Route::get('show', [CartController::class,'show'])->name('cart.show');
+        Route::get('show', [CartController::class, 'show'])->name('cart.show');
         Route::group(['prefix' => '{cart}'], function () {
             Route::group(['prefix' => 'cartItem'], function () {
-                Route::delete('{cartItem}/delete', [CartController::class,'removeCartItem'])->name('cart.delete');
+                Route::delete('{cartItem}/delete', [CartController::class, 'removeCartItem'])->name('cart.delete');
             });
         });
     });
@@ -67,7 +70,10 @@ Route::group(['middleware' => ['auth:site'],'as' => 'site.'], function () {
 
 
     Route::post('order/store', [OrderController::class, 'createOrderAndGoToGateway'])->name('order.store');
+
+
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.home');
 });
 
 
-Route::get('tt', [\App\Http\Controllers\ZahraController::class,'index']);//dont remove it,its for Zahra
+Route::get('tt', [\App\Http\Controllers\ZahraController::class, 'index']);//dont remove it,its for Zahra

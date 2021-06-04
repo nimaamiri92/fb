@@ -34,4 +34,11 @@ class UserRepository extends BaseRepository
     {
         $user->addresses()->save(new Address($addressData));
     }
+
+    public function dashboard(User $user)
+    {
+        return $user->load(['addresses' =>function($query){
+            $query->where('is_default',1);
+        }]);
+    }
 }
