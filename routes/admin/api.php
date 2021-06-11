@@ -9,6 +9,7 @@ Route::group(['prefix' => 'orders','middleware' => ['auth:admin']], function () 
     Route::post('/approved', [OrderController::class, 'approvedOrder']);
     Route::post('/rejectOrder', [OrderController::class, 'rejectOrder']);
     Route::get('/{order}', [OrderController::class, 'show']);
+    Route::get('/{order}/download-invoice', [OrderController::class, 'generatePdf']);
     Route::patch('/{order}/update', [OrderController::class, 'update']);
 });
 Route::group(['prefix' => 'attributeValue','middleware' => ['auth:admin']], function () {

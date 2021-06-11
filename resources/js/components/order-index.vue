@@ -131,7 +131,7 @@ html {
         </div>
 
 
-        <!--  Invoice PDF      -->
+        <!--  Invoice PDF   -->
         <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
@@ -147,6 +147,8 @@ html {
                             <button @click="downloadPdf(show_order.id)" class="btn btn-primary" style="float: left">
                                 دانلود فاکتور
                             </button>
+                            <button v-on:click="rejectOrder([show_order.id])" type="button" class="btn btn-danger">رد سفارش</button>
+                            <button v-on:click="approvedOrders([show_order.id])" type="button" class="btn btn-success">تایید سفارش</button>
                         </p>
                         <p style="font-size: 20px;">سفارشات</p>
                         <table class="table table-bordered" style="margin-bottom: 35px;">
@@ -239,8 +241,9 @@ html {
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">بستن</button>
+                        <button v-on:click="rejectOrder([show_order.id])" type="button" class="btn btn-danger">رد سفارش</button>
+                        <button v-on:click="approvedOrders([show_order.id])" type="button" class="btn btn-success">تایید سفارش</button>
                     </div>
                 </div>
             </div>
@@ -476,31 +479,32 @@ export default {
         toggle() {
             this.open = !this.open;
         },
-        approvedOrders() {
+        approvedOrders(ids =null) {
+
+            if (ids === null) {
+                ids = this.selected_row
+            }
 
             let url = 'orders/approved';
             let self = this
             axios
                 .post(url, {
-                    "orders": this.selected_row
+                    "orders": ids
                 })
-                .then(response => {
-
-                });
 
             location.reload();
         },
-        rejectOrder() {
+        rejectOrder(ids =null) {
 
+            if (ids === null) {
+                ids = this.selected_row
+            }
             let url = 'orders/rejectOrder';
             let self = this
             axios
                 .post(url, {
-                    "orders": this.selected_row
+                    "orders": ids
                 })
-                .then(response => {
-
-                });
 
             location.reload();
         }
