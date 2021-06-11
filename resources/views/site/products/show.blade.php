@@ -173,9 +173,9 @@
                             <p>{{ $similarProduct->product_name }}</p>
                             <div class="d-flex justify-content-between pl-2">
                                 <p>{{ $similarProduct->product_price_discount }} ريال</p>
-                                <p v-if="{{ $similarProduct->product_discount }}" class="old-price">{{ $similarProduct->price }} ريال</p>
+                                <p style="@if(!$similarProduct->product_discount) display: none @endif" class="old-price">{{ $similarProduct->price }} ريال</p>
                             </div>
-                            <span v-if="{{ $similarProduct->product_discount }}" class="recommendations__item__off-badge">{{ $similarProduct->product_discount }}% تخفیف</span>
+                            <span style="@if(!$similarProduct->product_discount) display: none @endif" class="recommendations__item__off-badge">{{ $similarProduct->product_discount }}% تخفیف</span>
                         </div>
                         @endforeach
                     </div>
