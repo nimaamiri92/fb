@@ -58,7 +58,7 @@ html {
                                      @change="orderFilter()"/>
                         </div>
                     </div>
-                    <div class="form-inline col-md-3">
+                    <div class="form-inline col-md-2">
                         <label for="payment_status">وضعیت پرداخت: </label>
                         <div id="payment_status" style="margin: 5px">
                             <Select2 style="width: 150px" v-model="payment_status_filter"
@@ -70,13 +70,13 @@ html {
 
                     <div class="col-md-1 mr-2 " v-if="selected_row.length > 0">
                         <span class="input-group-append">
-                            <button v-on:click="setOrdersAsNotPaid"
+                            <button v-on:click="approvedOrders"
                                     class="btn btn-success btn-flat">تایید گروهی</button>
                         </span>
                     </div>
                     <div class="col-md-1 mr-lg-5" style="margin-right: 40px" v-if="selected_row.length > 0">
                         <span class="input-group-append">
-                            <button v-on:click="setOrdersAsPaid" class="btn btn-danger btn-flat">رد گروهی</button>
+                            <button v-on:click="rejectOrder" class="btn btn-danger btn-flat">رد گروهی</button>
                         </span>
                     </div>
                 </div>
@@ -109,7 +109,7 @@ html {
                         <td v-on:click="selectOrder(order)">{{ order.name_of_receiver }}</td>
                         <td v-on:click="selectOrder(order)">{{ order.user.name }}</td>
                         <td v-on:click="selectOrder(order)">{{ order.total_order_price }}</td>
-                        <td :style="{backgroundColor:order.tdColor}">
+                        <td v-on:click="selectOrder(order)" :style="{backgroundColor:order.tdColor}">
                             <span class="badge" :class="order.order_state_badge">{{ order.order_state }}</span>
                         </td>
                         <td v-on:click="selectOrder(order)">
@@ -131,7 +131,7 @@ html {
         </div>
 
 
-        <!-- Modal -->
+        <!--  Invoice PDF      -->
         <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
@@ -323,15 +323,13 @@ export default {
                 + '&sort=' + (sort_type === 'DESC' ? '+' + sort : '-' + sort());
 
 
-
-
-            if (this.search !== null && this.search !== ''){
+            if (this.search !== null && this.search !== '') {
                 url += '&search=' + this.search
             }
-            if (this.order_state_filter !== null  && this.order_state_filter !== ''){
+            if (this.order_state_filter !== null && this.order_state_filter !== '') {
                 url += '&order_state=' + this.order_state_filter
             }
-            if (this.payment_status_filter !== null  && this.payment_status_filter !== ''){
+            if (this.payment_status_filter !== null && this.payment_status_filter !== '') {
                 url += '&payment_status=' + this.payment_status_filter
             }
 
@@ -349,10 +347,7 @@ export default {
                         order.payment_status = reserved_payment_statuses.text
 
                         Vue.set(order, 'icon', reserved_payment_statuses.icon)
-                        if (reserved_payment_statuses.icon === "negative") {
-                            order.order_state_badge = 'bg-danger'
-                            order.payment_status = reserved_payment_statuses.text
-                        }
+
                     })
 
                     self.listOfOrders = self.orders.data
@@ -368,36 +363,36 @@ export default {
         setOrderFilters() {
             this.order_state_filter_option = [
                 {
-                    "id":"APPROVED",
-                    "text":this.order_states.APPROVED.text
+                    "id": "APPROVED",
+                    "text": this.order_states.APPROVED.text
                 },
                 {
-                    "id":"IN_PROGRESS",
-                    "text":this.order_states.IN_PROGRESS.text
+                    "id": "IN_PROGRESS",
+                    "text": this.order_states.IN_PROGRESS.text
                 },
                 {
-                    "id":"REJECTED",
-                    "text":this.order_states.REJECTED.text
+                    "id": "REJECTED",
+                    "text": this.order_states.REJECTED.text
                 }
             ]
         },
         setPaymentFilters() {
             this.payment_status_filter_option = [
                 {
-                    "id":"FAIL_PAYMENT",
-                    "text":this.payment_statuses.FAIL_PAYMENT.text
+                    "id": "FAIL_PAYMENT",
+                    "text": this.payment_statuses.FAIL_PAYMENT.text
                 },
                 {
-                    "id":"NOT_PAID",
-                    "text":this.payment_statuses.NOT_PAID.text
+                    "id": "NOT_PAID",
+                    "text": this.payment_statuses.NOT_PAID.text
                 },
                 {
-                    "id":"SUCCESSFUL_PAYMENT",
-                    "text":this.payment_statuses.SUCCESSFUL_PAYMENT.text
+                    "id": "SUCCESSFUL_PAYMENT",
+                    "text": this.payment_statuses.SUCCESSFUL_PAYMENT.text
                 },
                 {
-                    "id":"UNKNOWN_PAYMENT",
-                    "text":this.payment_statuses.UNKNOWN_PAYMENT.text
+                    "id": "UNKNOWN_PAYMENT",
+                    "text": this.payment_statuses.UNKNOWN_PAYMENT.text
                 }
             ]
         },
@@ -444,7 +439,10 @@ export default {
                 Vue.set(order, 'preTrColor', order.trColor)
                 order.trColor = '#abadb3'
             } else {
-                this.selected_row.pop(order.id)
+                const index = this.selected_row.indexOf(order.id);
+                if (index > -1) {
+                    this.selected_row.splice(index, 1);
+                }
                 order.trColor = ''
             }
         },
@@ -472,19 +470,40 @@ export default {
         doSearch() {
             this.callListOfOrderApi(1, this.search)
         },
-        setOrdersAsNotPaid() {
-
-        },
         setOrdersAsPaid() {
 
         },
         toggle() {
             this.open = !this.open;
         },
+        approvedOrders() {
+
+            let url = 'orders/approved';
+            let self = this
+            axios
+                .post(url, {
+                    "orders": this.selected_row
+                })
+                .then(response => {
+
+                });
+
+            location.reload();
+        },
+        rejectOrder() {
+
+            let url = 'orders/rejectOrder';
+            let self = this
+            axios
+                .post(url, {
+                    "orders": this.selected_row
+                })
+                .then(response => {
+
+                });
+
+            location.reload();
+        }
     }
 }
 </script>
-
-<style scoped>
-
-</style>

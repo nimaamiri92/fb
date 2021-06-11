@@ -78,4 +78,15 @@ class OrderController extends BaseController
             200
         );
     }
+
+    public function approvedOrder(Request $request)
+    {
+        $orders = $request->get('orders');
+        Order::query()->whereIn('id',$orders)->update(['order_state' => Order::ORDER_STATUS_APPROVED]);
+    }
+    public function rejectOrder(Request $request)
+    {
+        $orders = $request->get('orders');
+        Order::query()->whereIn('id',$orders)->update(['order_state' => Order::ORDER_STATUS_REJECTED]);
+    }
 }
