@@ -56,9 +56,9 @@ class Order extends BaseModel
 {
     use PersianDateConvertor;
 
-    const ORDER_STATUS_IN_PROGRESS= 'ORDER_STATUS_IN_PROGRESS';
-    const ORDER_STATUS_APPROVED= 'ORDER_STATUS_APPROVED';
-    const ORDER_STATUS_REJECTED= 'ORDER_STATUS_REJECTED';
+    const ORDER_STATUS_IN_PROGRESS= 'IN_PROGRESS';
+    const ORDER_STATUS_APPROVED= 'APPROVED';
+    const ORDER_STATUS_REJECTED= 'REJECTED';
 
     protected $table = 'orders';
 

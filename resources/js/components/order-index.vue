@@ -1,5 +1,5 @@
 <style>
-html{
+html {
     font-family: IranYekan !important;
 }
 
@@ -44,27 +44,34 @@ html{
                 <div class="row">
                     <div class="form-inline col-md-3">
                         <div class="input-group">
-                            <input  v-on:keyup.enter="doSearch" v-on:keydown.enter="doSearch" type="text" v-model="search" class="form-control">
+                            <input v-on:keyup.enter="doSearch" v-on:keydown.enter="doSearch" type="text"
+                                   v-model="search" class="form-control">
+
                         </div>
                     </div>
                     <div class="form-inline col-md-2">
                         <label for="order_state">وضعیت سفارش: </label>
                         <div id="order_state" style="margin: 5px">
-                            <Select2  style="width: 150px" v-model="order_state_filter" :options="order_state_filter_option"
-                                     :settings="{ multiple: false,'width': '100%','scrollAfterSelect':true }" @change="orderStatusFilterEvent($event)"/>
+                            <Select2 style="width: 150px" v-model="order_state_filter"
+                                     :options="order_state_filter_option"
+                                     :settings="{ multiple: false,'width': '100%','scrollAfterSelect':true }"
+                                     @change="orderFilter()"/>
                         </div>
                     </div>
                     <div class="form-inline col-md-3">
                         <label for="payment_status">وضعیت پرداخت: </label>
                         <div id="payment_status" style="margin: 5px">
-                            <Select2  style="width: 150px" v-model="payment_status_filter" :options="payment_status_filter_option"
-                                      :settings="{ multiple: false,'width': '100%','scrollAfterSelect':true }" @change="orderStatusFilterEvent($event)"/>
+                            <Select2 style="width: 150px" v-model="payment_status_filter"
+                                     :options="payment_status_filter_option"
+                                     :settings="{ multiple: false,'width': '100%','scrollAfterSelect':true }"
+                                     @change="paymentFilter()"/>
                         </div>
                     </div>
 
                     <div class="col-md-1 mr-2 " v-if="selected_row.length > 0">
                         <span class="input-group-append">
-                            <button v-on:click="setOrdersAsNotPaid" class="btn btn-success btn-flat">تایید گروهی</button>
+                            <button v-on:click="setOrdersAsNotPaid"
+                                    class="btn btn-success btn-flat">تایید گروهی</button>
                         </span>
                     </div>
                     <div class="col-md-1 mr-lg-5" style="margin-right: 40px" v-if="selected_row.length > 0">
@@ -180,32 +187,32 @@ html{
                         <p style="font-size: 20px;">اطلاعات ارسال</p>
                         <table class="table table-bordered" style="margin-bottom: 35px;">
                             <tbody>
-                                <tr>
-                                    <td style="width: 100px;" class="text-bold">نام گیرنده</td>
-                                    <td colspan="3">{{ show_order.name_of_receiver }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-bold">موبایل</td>
-                                    <td>{{ show_order.phone }}</td>
-                                    <td class="text-bold">موبایل ۲</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-bold">استان</td>
-                                    <td>{{ show_order.province }}</td>
-                                    <td class="text-bold">شهر</td>
-                                    <td>{{ show_order.city }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-bold">آدرس</td>
-                                    <td colspan="3">{{ show_order.address }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="text-bold">نحوه ارسال</td>
-                                    <td>{{ show_order.shipment_type_name }}</td>
-                                    <td class="text-bold">زمان ارسال</td>
-                                    <td></td>
-                                </tr>
+                            <tr>
+                                <td style="width: 100px;" class="text-bold">نام گیرنده</td>
+                                <td colspan="3">{{ show_order.name_of_receiver }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-bold">موبایل</td>
+                                <td>{{ show_order.phone }}</td>
+                                <td class="text-bold">موبایل ۲</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="text-bold">استان</td>
+                                <td>{{ show_order.province }}</td>
+                                <td class="text-bold">شهر</td>
+                                <td>{{ show_order.city }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-bold">آدرس</td>
+                                <td colspan="3">{{ show_order.address }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-bold">نحوه ارسال</td>
+                                <td>{{ show_order.shipment_type_name }}</td>
+                                <td class="text-bold">زمان ارسال</td>
+                                <td></td>
+                            </tr>
                             </tbody>
                         </table>
 
@@ -278,15 +285,15 @@ export default {
                 }
             },
             order_states: {
-                "ORDER_STATUS_REJECTED": {
+                "REJECTED": {
                     'badge': 'bg-danger',
                     'text': 'رد شده',
                 },
-                "ORDER_STATUS_APPROVED": {
+                "APPROVED": {
                     'badge': 'bg-success',
                     'text': 'تایید شده',
                 },
-                "ORDER_STATUS_IN_PROGRESS": {
+                "IN_PROGRESS": {
                     'badge': 'bg-warning',
                     'text': 'در انتظار تایید',
                 }
@@ -304,35 +311,37 @@ export default {
         this.setPaymentFilters()
     },
     methods: {
-        paymentStatusFilterEvent(val){
+        paymentStatusFilterEvent(val) {
             console.log(val);
         },
-        orderStatusFilterEvent(val){
-            console.log(val)
-        },
-        toPersianNumberFormat(x){
+        toPersianNumberFormat(x) {
             return x.toLocaleString('fa-IR').replace(/\٬/g, ",");
         },
-        callListOfOrderApi(page = 1,searchPhrase = null,sort = 'id',sort_type = 'DESC',order_filter = null,payment_filter = null,filter_value = null) {
+        callListOfOrderApi(page = 1, sort = 'id', sort_type = 'DESC') {
             this.isLoading = true;
             let url = 'orders?page=' + page
                 + '&sort=' + (sort_type === 'DESC' ? '+' + sort : '-' + sort());
 
-                url += searchPhrase != null ?  '&search=' + searchPhrase : ''
-                // url += filter != null ? '&filter=' + filter : ''
-            // if (order_filter !== null && payment_filter !== null){
-            //     url += '&filter='
-            // }
-                url += filter_value != null ? '&filter_value' + filter_value : ''
+
+
+
+            if (this.search !== null && this.search !== ''){
+                url += '&search=' + this.search
+            }
+            if (this.order_state_filter !== null  && this.order_state_filter !== ''){
+                url += '&order_state=' + this.order_state_filter
+            }
+            if (this.payment_status_filter !== null  && this.payment_status_filter !== ''){
+                url += '&payment_status=' + this.payment_status_filter
+            }
+
             let self = this
             axios
                 .get(url)
                 .then(response => {
                     self.orders = response.data;
                     response.data.data.forEach((order) => {
-                        console.log(self.order_states)
-                        console.log(order.order_state)
-                        var reserved_order_state = self.order_states['ORDER_STATUS_' + order.order_state]
+                        var reserved_order_state = self.order_states[order.order_state]
                         var reserved_payment_statuses = self.payment_statuses[order.payment_status]
                         order.order_state = reserved_order_state.text
                         order.order_state_badge = reserved_order_state.badge
@@ -350,19 +359,46 @@ export default {
                     self.isLoading = false;
                 });
         },
-        setOrderFilters(){
-            this.order_state_filter_option =  [
-                this.order_states.ORDER_STATUS_APPROVED.text,
-                this.order_states.ORDER_STATUS_IN_PROGRESS.text,
-                this.order_states.ORDER_STATUS_REJECTED.text,
+        orderFilter() {
+            this.callListOfOrderApi(1, 'id', 'DESC')
+        },
+        paymentFilter() {
+            this.callListOfOrderApi(1, 'id', 'DESC')
+        },
+        setOrderFilters() {
+            this.order_state_filter_option = [
+                {
+                    "id":"APPROVED",
+                    "text":this.order_states.APPROVED.text
+                },
+                {
+                    "id":"IN_PROGRESS",
+                    "text":this.order_states.IN_PROGRESS.text
+                },
+                {
+                    "id":"REJECTED",
+                    "text":this.order_states.REJECTED.text
+                }
             ]
         },
-        setPaymentFilters(){
-            this.payment_status_filter_option =  [
-                this.payment_statuses.FAIL_PAYMENT.text,
-                this.payment_statuses.NOT_PAID.text,
-                this.payment_statuses.SUCCESSFUL_PAYMENT.text,
-                this.payment_statuses.UNKNOWN_PAYMENT.text,
+        setPaymentFilters() {
+            this.payment_status_filter_option = [
+                {
+                    "id":"FAIL_PAYMENT",
+                    "text":this.payment_statuses.FAIL_PAYMENT.text
+                },
+                {
+                    "id":"NOT_PAID",
+                    "text":this.payment_statuses.NOT_PAID.text
+                },
+                {
+                    "id":"SUCCESSFUL_PAYMENT",
+                    "text":this.payment_statuses.SUCCESSFUL_PAYMENT.text
+                },
+                {
+                    "id":"UNKNOWN_PAYMENT",
+                    "text":this.payment_statuses.UNKNOWN_PAYMENT.text
+                }
             ]
         },
         log(item) {
@@ -379,14 +415,14 @@ export default {
                     let total_final_price = 0;
                     let user_payment_amount = 0;
                     self.show_order = response.data
-                    self.show_order.order_items.forEach((order_items,index) => {
+                    self.show_order.order_items.forEach((order_items, index) => {
                         total_price += Number(order_items.product_price);
                         total_final_price += Number(order_items.product_price * order_items.quantity)
                         self.show_order.order_items[index].one_product_price_display = self.toPersianNumberFormat(Number(order_items.product_price))
                         self.show_order.order_items[index].all_quantity_of_one_product_price_display = self.toPersianNumberFormat(Number(order_items.product_price * order_items.quantity))
                     });
 
-                    self.show_order.payments.forEach((payment,index) => {
+                    self.show_order.payments.forEach((payment, index) => {
                         if (payment.res_code === 0) {
                             user_payment_amount = payment.total_order_price
                         }
@@ -409,7 +445,7 @@ export default {
                 order.trColor = '#abadb3'
             } else {
                 this.selected_row.pop(order.id)
-                order.trColor = order.preTrColor
+                order.trColor = ''
             }
         },
         downloadPdf(order_id) {

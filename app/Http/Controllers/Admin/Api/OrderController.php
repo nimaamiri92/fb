@@ -25,10 +25,7 @@ class OrderController extends BaseController
     public function index(Request $request)
     {
         $filters = $request->all();
-        return response()->json(
-            $products = $this->orderRepository->listOrders($filters),
-            200
-        );
+        return response()->json($this->orderRepository->listOrders($filters),200);
     }
 
     public function show(Order $order)
