@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Site\Product\productListRequest;
+use App\Models\Image;
 use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\Slider;
@@ -83,7 +84,11 @@ class ProductController extends BaseController
         $this->setCartContent();
         $product = $this->productRepository->show($product);
         $similarProducts = $this->productRepository->getSimilarProductBaseOnCategory($product);
-        return view('site.products.show', compact('product', 'similarProducts'));
+        $imageSizeGuide = Image::query()->where([
+            'imageable_id' => 0,
+            'imageable_type' => 'cloth_image_size_guidance',
+        ])->first();
+        return view('site.products.show', compact('product', 'similarProducts','imageSizeGuide'));
     }
 
 
