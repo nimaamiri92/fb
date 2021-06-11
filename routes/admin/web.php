@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth:admin']], function () {
         Route::patch('/{product}/attribute/{attribute}/updateProductPriceAttribute', [ProductController::class, 'updateProductPriceAttribute'])->name('products.updateProductPriceAttribute');
         Route::patch('/{product}/attribute/{attribute}/updateProductQuantityAttribute', [ProductController::class, 'updateProductQuantityAttribute'])->name('products.updateProductQuantityAttribute');
         Route::post('/{product}/upload-images', [ProductController::class, 'uploadImages'])->name('product.upload_images');
+        Route::post('/save-upload-cloth-image-size-show', [ProductController::class, 'uploadClothImageSize'])->name('products.save_upload_cloth_image_size_show');
+        Route::get('/upload-cloth-image-size-show', [ProductController::class, 'uploadClothImageSizeShow'])->name('products.upload_cloth_image_size_show');
         Route::delete('/{product}/image/{image}/delete', [ProductController::class, 'deleteImage'])->name('product.delete_upload_images');
     });
     /**

@@ -18,7 +18,12 @@ use App\Repositories\Admin\AttributeValueRepository;
 use App\Repositories\Admin\CategoryRepository;
 use App\Repositories\Admin\ProductAttributeRepository;
 use App\Repositories\Admin\ProductRepository;
+use App\Tools\InterventionFilters\ImageFilter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image as ImageIntervention;
 
 class ProductController extends BaseController
 {
@@ -146,6 +151,59 @@ class ProductController extends BaseController
         $this->productRepository->AssignAttributes($product, $data);
         return redirect()->route('admin.products.edit', $product->id);
     }
+
+
+    public function uploadClothImageSizeShow(Request $request)
+    {
+        $this->setPageTitle('راهنمای سایز لباس');
+        $this->setSideBar('uploadClothImageSize');
+        $image = Image::query()->where([
+            'imageable_id' => 0,
+            'imageable_type' => 'cloth_image_size_guidance',
+        ])->first();
+        return view('admin.products.clothImageSizeGuidance',compact('image'));
+    }
+    public function deleteClothImageSizeShow(Request $request)
+    {
+        $this->setPageTitle('راهنمای سایز لباس');
+        $this->setSideBar('uploadClothImageSize');
+        $image = Image::query()->where([
+            'imageable_id' => 0,
+            'imageable_type' => 'cloth_image_size_guidance',
+        ])->first();
+        return view('admin.products.clothImageSizeGuidance',compact('image'));
+    }
+    public function uploadClothImageSize(Request $request)
+    {
+        $file = $request->file('image');
+        $dir = Config::get('custom_config.files.store_directory');
+        $disk = Config::get('custom_config.files.disk');
+        if (!File::isDirectory($dir)){
+            File::makeDirectory($dir, 0777, true, true);
+        }
+        $path = $file->hashName($dir);
+        $image = ImageIntervention::make($file);
+
+
+        $isImageSaved = Storage::disk($disk)
+            ->put($path, (string)$image->encode());
+
+        if ($isImageSaved) {
+
+            $image = Image::query()->updateOrCreate([
+                'imageable_id' => 0,
+                'imageable_type' => 'cloth_image_size_guidance',
+            ],[
+                'path' => $path,
+                'imageable_id' => 0,
+                'imageable_type' => 'cloth_image_size_guidance',
+            ]);
+        }
+
+        return redirect()->route('admin.products.upload_cloth_image_size_show')
+            ->with('message', trans('products.product_image_uploaded_successfully'));
+    }
+
     /************************************************************************************************************
      *
      *                              API

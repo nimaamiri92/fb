@@ -108,12 +108,32 @@
                         </li>
                     @endcan
 
+
+
+
                     @can('view', \App\Models\Setting::class)
-                        <li class="nav-item">
-                            <a href="{{ route('admin.settings.index') }}" class="@if($sidebarName == 'settings') active @endif nav-link">
-                                <i class="nav-icon fa fa-list-alt text-danger"></i>
-                                <p class="text">تنظیمات</p>
+                        <li class="nav-item has-treeview @if($sidebarName == 'settings') menu-open @endif">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fa fa-dashboard"></i>
+                                <p>
+                                    تنظیمات
+                                    <i class="right fa fa-angle-left"></i>
+                                </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.settings.index') }}" class="@if($sidebarName == 'settings') active @endif nav-link">
+                                        <i class="nav-icon fa fa-list-alt text-danger"></i>
+                                        <p class="text">بانک</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.products.upload_cloth_image_size_show') }}" class="@if($sidebarName == 'uploadClothImageSize') active @endif nav-link">
+                                        <i class="nav-icon fa fa-list-alt text-danger"></i>
+                                        <p class="text">عکس راهنمای سایز</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     @endcan
                 </ul>

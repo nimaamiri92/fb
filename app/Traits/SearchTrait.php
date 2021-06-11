@@ -16,9 +16,9 @@ trait SearchTrait
         return static::query()->where(function ($query) use ($keyword, $matchAllFields) {
             foreach (static::getSearchFields() as $field) {
                 if ($matchAllFields) {
-                    $query->where($field, 'LIKE', "$keyword%");
+                    $query->where($field, 'LIKE', "%$keyword%");
                 } else {
-                    $query->orWhere($field, 'LIKE', "$keyword%");
+                    $query->orWhere($field, 'LIKE', "%$keyword%");
                 }
             }
         });
