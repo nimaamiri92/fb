@@ -2,16 +2,7 @@
     <div class="container main-content">
         <div class="row align-items-center">
             <div class="col-12 col-md-12 col-lg-6 newsletter">
-                <form action="">
-                    <div class="form-group d-flex flex-column">
-                        <label class="d-block text-center text-md-right" for="newsletter">عضویت در خبرنامه</label>
-                        <div class="d-flex flex-column flex-md-row">
-                            <input class="newsletter__email form-control flex-grow-1 ml-md-3 mb-md-0 ml-0 mb-3"
-                                   placeholder="آدرس پست الکترونیک" type="email" id="newsletter">
-                            <button class="btn action-btn">عضویت</button>
-                        </div>
-                    </div>
-                </form>
+
             </div>
             <div class="col-6 col-md-6 col-lg-4 d-flex contact-info justify-content-lg-end">
                 <i class="svg-icon svg-icon-phone ml-3 d-none d-md-inline-block"></i>

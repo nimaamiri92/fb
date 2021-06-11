@@ -277,28 +277,9 @@
             $(".address-option input").change(function() {
                 if ($(this).is(':checked')) {
                     shipment_price = $(this).data("price")
-                    $('.shipment-show').text(
-                        number_format(
-                            shipment_price,
-                            0,
-                            0,
-                            ','
-                        ) +
-                        ' تومان'
-                    )
+                    $('.shipment-show').text(number_format(shipment_price,0,0,',') +' تومان')
                     $('.total-price').text(
-                        number_format(
-                            shipment_price + {
-                                {
-                                    $totalPriceWithDiscount
-                                }
-                            },
-                            0,
-                            0,
-                            ','
-                        ) +
-                        ' تومان'
-                    )
+                        number_format(shipment_price + {{ $totalPriceWithDiscount }},0,0,',') +' تومان')
                     $('.total-discount').css('color', 'red')
                 }
             });
