@@ -66,11 +66,11 @@
                 <div class="col-4 col-md-2 secondary d-flex align-items-start justify-content-center flex-column flex-md-row quantity-col">
                     <p class="d-block d-md-none">تعداد</p>
                     <div class="d-flex quantity-input px-0">
-                        <button class="border-left-0 p-0 p-lg-2 cart-product-quantity-plus" type="button" data-point="1" data-url="{{ url("api/cart/". $cartId ."/cartItem/". $cartItem['cartItemId'] . "/change-quantity") }}" @if(!$cartItem['has_enough_entity']) disabled @endif>
+                        <button class="border-left-0 p-0 p-lg-2 cart-product-quantity-plus" type="button" data-point="1" @if($cartItem['quantity'] > 10 ) disabled @endif data-url="{{ url("api/cart/". $cartId ."/cartItem/". $cartItem['cartItemId'] . "/change-quantity") }}" @if(!$cartItem['has_enough_entity']) disabled @endif>
                             <i class="fas fa-plus"></i>
                         </button>
                         <input class="form-control text-center" type="number" name="quantity" id="productQuantity" min="1" value="{{ $cartItem['quantity'] }}" readonly>
-                        <button class="border-right-0 p-0 p-lg-2 cart-product-quantity-minus" type="button" data-point="-1" data-url="{{ url("api/cart/". $cartId ."/cartItem/". $cartItem['cartItemId'] . "/change-quantity") }}">
+                        <button class="border-right-0 p-0 p-lg-2 cart-product-quantity-minus" @if($cartItem['quantity'] < 2) disabled @endif type="button" data-point="-1" data-url="{{ url("api/cart/". $cartId ."/cartItem/". $cartItem['cartItemId'] . "/change-quantity") }}">
                             <i class="fas fa-minus"></i>
                         </button>
                     </div>
@@ -312,15 +312,16 @@
                         let currentVal = parseInt(quantitInput.val(), 10) + parseInt(quantity);
                         quantitInput.val(currentVal);
 
-                        if (0 < currentVal && currentVal < 11) {
-                            console.log(0 < currentVal < 11)
-                            selector.hasClass('product-quantity-plus') && selector.prop('disabled', false)
-                            selector.hasClass('product-quantity-minus') && selector.prop('disabled', false)
+                        //min and max quantity that user can add to cart
+                        //sorry for this type of coding, Im on the rush
+                        if (1 < currentVal && currentVal < 11) {
+                            $('.cart-product-quantity-plus').prop('disabled', false)
+                            $('.cart-product-quantity-minus').prop('disabled', false)
                         } else {
-                            if (selector.hasClass('product-quantity-minus')) {
+                            if (selector.hasClass('cart-product-quantity-minus')) {
                                 selector.prop('disabled', true)
                             }
-                            if (selector.hasClass('product-quantity-plus')) {
+                            if (selector.hasClass('cart-product-quantity-plus')) {
                                 selector.prop('disabled', true)
                             }
 
