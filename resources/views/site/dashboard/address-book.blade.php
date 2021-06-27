@@ -39,7 +39,7 @@
                                 {{ $defaultAddress->phone }}
                             </p>
                             <div class="d-flex">
-                                <a class="profile-section-actions text-right" href="">
+                                <a class="profile-section-actions text-right" href="{{ route('site.addresses.edit',$defaultAddress->id) }}">
                                     ویرایش آدرس
                                 </a>
                             </div>
@@ -72,19 +72,19 @@
                                     </p>
                                 </address>
                                 <div class="d-flex">
-                                    <a class="profile-section-actions pl-4 border-left ml-4" href="">
+                                    <a class="profile-section-actions pl-4 border-left ml-4" href="{{ route('site.addresses.edit',$otherAddress->id) }}">
                                         ویرایش آدرس
                                     </a>
-                                    <a class="profile-section-actions" href="">حذف آدرس</a>
+                                    <a class="profile-section-actions" href="{{ route('site.addresses.delete',$otherAddress->id) }}">حذف آدرس</a>
                                 </div>
                             </div>
                         @endforeach
 
                     </div>
                     <div class="d-flex flex-column flex-md-row margin-top-4">
-                        <button class="btn action-btn">
+                        <a href="{{ route('site.addresses.create') }}" class="btn action-btn">
                             افزودن آدرس جدید
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

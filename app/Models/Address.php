@@ -46,6 +46,7 @@ class Address extends BaseModel
         'address',
         'postal_code',
         'phone',
+        'is_default',
     ];
 
     public function user()

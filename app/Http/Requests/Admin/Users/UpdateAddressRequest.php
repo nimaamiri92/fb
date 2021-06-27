@@ -7,7 +7,7 @@ use Baloot\Models\City;
 use Baloot\Models\Province;
 use Illuminate\Validation\Rule;
 
-class AddressRequest extends BaseRequest
+class UpdateAddressRequest extends BaseRequest
 {
     public function postRule()
     {
@@ -29,7 +29,8 @@ class AddressRequest extends BaseRequest
                 'phone:IR',
                 'unique:admins,mobile'
             ],
-            'address' => ['required']
+            'address' => ['required'],
+            'is_default' => ['nullable']
         ];
     }
 }

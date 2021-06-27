@@ -70,6 +70,9 @@ Route::group(['middleware' => ['auth:site'], 'as' => 'site.'], function () {
     Route::get('address/create', [AddressController::class, 'create'])->name('addresses.create');
     Route::post('address/store', [AddressController::class, 'store'])->name('addresses.store');
     Route::get('address', [AddressController::class, 'index'])->name('addresses.index');
+    Route::get('address/{address}/edit', [AddressController::class, 'edit'])->name('addresses.edit');
+    Route::post('address/{address}/update', [AddressController::class, 'update'])->name('addresses.update');
+    Route::get('address/{address}/delete', [AddressController::class, 'delete'])->name('addresses.delete');
 
 
     Route::post('order/store', [OrderController::class, 'createOrderAndGoToGateway'])->name('order.store');
