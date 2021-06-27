@@ -69,7 +69,7 @@ Route::group(['middleware' => ['auth:site'], 'as' => 'site.'], function () {
 
     Route::get('address/create', [AddressController::class, 'create'])->name('addresses.create');
     Route::post('address/store', [AddressController::class, 'store'])->name('addresses.store');
-    Route::post('address', [AddressController::class, 'index'])->name('addresses.index');
+    Route::get('address', [AddressController::class, 'index'])->name('addresses.index');
 
 
     Route::post('order/store', [OrderController::class, 'createOrderAndGoToGateway'])->name('order.store');

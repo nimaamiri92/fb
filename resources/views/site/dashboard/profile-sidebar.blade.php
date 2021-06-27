@@ -14,7 +14,7 @@
             <a class="profile-links" href="{{ route('site.dashboard.wishlist') }}">لیست علاقه مندی ها</a>
         </li>
         <li class="text-right mb-3">
-            <a class="profile-links" href="">آدرس های پستی</a>
+            <a class="profile-links" href="{{ route('site.addresses.index') }}">آدرس های پستی</a>
         </li>
     </ul>
 </div>

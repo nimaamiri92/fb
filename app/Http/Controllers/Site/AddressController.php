@@ -57,8 +57,12 @@ class AddressController extends BaseController
 
     public function index()
     {
+        $this->setPageTitle('آدرس ها');
+        $this->setCartContent();
         $user = currentUserObj();
         $addresses =  $this->addressRepository->getUserAddressList($user);
-//        return view('admin.addresses.create',compact('user','provinces'));
+        $defaultAddress = $addresses->where('is_default',1)->first();
+        $otherAddresses = $addresses->where('is_default',0)->all();
+        return view('site.dashboard.address-book',compact('defaultAddress','otherAddresses'));
     }
 }
