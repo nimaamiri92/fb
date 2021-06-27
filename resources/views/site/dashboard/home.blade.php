@@ -35,10 +35,10 @@
                             {{ $dashboard->mobile }}
                         </p>
                         <div class="d-flex">
-                            <a class="profile-section-actions pl-4 border-left ml-4" href="">
+                            <a class="profile-section-actions pl-4 border-left ml-4" href="{{ route('site.dashboard.edit-profile') }}">
                                 ویرایش
                             </a>
-                            <a class="profile-section-actions" href="">تغییر رمز عبور</a>
+                            <a class="profile-section-actions" href="{{ route('site.dashboard.edit-profile') }}">تغییر رمز عبور</a>
                         </div>
                     </div>
                 </div>

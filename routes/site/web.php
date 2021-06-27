@@ -76,6 +76,8 @@ Route::group(['middleware' => ['auth:site'], 'as' => 'site.'], function () {
 
 
     Route::get('dashboard', [UserController::class, 'index'])->name('dashboard.home');
+    Route::get('edit-profile', [UserController::class, 'editProfile'])->name('dashboard.edit-profile');
+    Route::post('save-edit-profile', [UserController::class, 'saveEditProfile'])->name('dashboard.save-edit-profile');
     Route::get('order-history', [UserController::class, 'orderHistory'])->name('dashboard.order-history');
     Route::get('order-history-details/{order}', [UserController::class, 'orderHistoryDetails'])
         ->name('dashboard.order-history-details');
