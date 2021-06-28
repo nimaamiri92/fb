@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Api;
 
 use App\Http\Controllers\BaseController;
+use App\Jobs\SendSms;
 use App\Models\Order;
 use App\Repositories\Admin\OrderRepository;
 use App\Services\PdfHelper;
@@ -25,7 +26,7 @@ class OrderController extends BaseController
     public function index(Request $request)
     {
         $filters = $request->all();
-        return response()->json($this->orderRepository->listOrders($filters),200);
+        return response()->json($this->orderRepository->listOrders($filters), 200);
     }
 
     public function show(Order $order)
@@ -43,7 +44,7 @@ class OrderController extends BaseController
         $total->totalPrice = 0;
         $total->totalFinalPrice = 0;
         $total->totalQuantity = 0;
-        foreach ($order->orderItems as $eachOrder){
+        foreach ($order->orderItems as $eachOrder) {
             $total->totalPrice += $eachOrder->product_price;
             $total->totalFinalPrice += $eachOrder->product_price * $eachOrder->quantity;
             $total->totalQuantity += $eachOrder->quantity;
@@ -53,12 +54,12 @@ class OrderController extends BaseController
         $payment = new \stdClass();
         $payment->successfulPaymentAmout = 0;
         foreach ($order->payments as $payment) {
-            if ($payment->res_code === 0){
+            if ($payment->res_code === 0) {
                 $payment->successfulPaymentAmout = $payment->total_order_price;
             }
         }
 
-        $html = view("admin.orders.order-pdf",compact('order','total','payment'));
+        $html = view("admin.orders.order-pdf", compact('order', 'total', 'payment'));
 
         $pdf = new Pdf($html);
 
@@ -82,11 +83,14 @@ class OrderController extends BaseController
     public function approvedOrder(Request $request)
     {
         $orders = $request->get('orders');
-        Order::query()->whereIn('id',$orders)->update(['order_state' => Order::ORDER_STATUS_APPROVED]);
+        Order::query()->whereIn('id', $orders)->update(['order_state' => Order::ORDER_STATUS_APPROVED]);
+        $order = Order::query()->whereIn('id', $orders)->first();
+        dispatch(new SendSms($order->phone, "سفارش شما با شماره پیگیری $order->id تایید شد و اماره ارسال گردید"));
     }
+
     public function rejectOrder(Request $request)
     {
         $orders = $request->get('orders');
-        Order::query()->whereIn('id',$orders)->update(['order_state' => Order::ORDER_STATUS_REJECTED]);
+        Order::query()->whereIn('id', $orders)->update(['order_state' => Order::ORDER_STATUS_REJECTED]);
     }
 }

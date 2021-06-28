@@ -67,18 +67,6 @@ html {
                                      @change="paymentFilter()"/>
                         </div>
                     </div>
-
-                    <div class="col-md-1 mr-2 " v-if="selected_row.length > 0">
-                        <span class="input-group-append">
-                            <button v-on:click="approvedOrders"
-                                    class="btn btn-success btn-flat">تایید گروهی</button>
-                        </span>
-                    </div>
-                    <div class="col-md-1 mr-lg-5" style="margin-right: 40px" v-if="selected_row.length > 0">
-                        <span class="input-group-append">
-                            <button v-on:click="rejectOrder" class="btn btn-danger btn-flat">رد گروهی</button>
-                        </span>
-                    </div>
                 </div>
                 <br>
                 <loading :active.sync="isLoading"
@@ -106,19 +94,19 @@ html {
                         <td v-on:click="openOrder(order.id)" data-toggle="modal" data-target="#exampleModalScrollable">
                             {{ "Ref. " + order.id }}
                         </td>
-                        <td v-on:click="selectOrder(order)">{{ order.name_of_receiver }}</td>
-                        <td v-on:click="selectOrder(order)">{{ order.user.name }}</td>
-                        <td v-on:click="selectOrder(order)">{{ order.total_order_price }}</td>
-                        <td v-on:click="selectOrder(order)" :style="{backgroundColor:order.tdColor}">
+                        <td v-on:click="openOrder(order.id)"  data-toggle="modal" data-target="#exampleModalScrollable">{{ order.name_of_receiver }}</td>
+                        <td v-on:click="openOrder(order.id)"  data-toggle="modal" data-target="#exampleModalScrollable">{{ order.user.name }}</td>
+                        <td v-on:click="openOrder(order.id)"  data-toggle="modal" data-target="#exampleModalScrollable">{{ order.total_order_price }}</td>
+                        <td v-on:click="openOrder(order.id)"  data-toggle="modal" data-target="#exampleModalScrollable" :style="{backgroundColor:order.tdColor}">
                             <span class="badge" :class="order.order_state_badge">{{ order.order_state }}</span>
                         </td>
-                        <td v-on:click="selectOrder(order)">
+                        <td v-on:click="openOrder(order.id)"  data-toggle="modal" data-target="#exampleModalScrollable">
                             <span>
                                 <status-indicator :status="order.icon" :pulse="true"/>
                                 {{ order.payment_status }}
                             </span>
                         </td>
-                        <td v-on:click="selectOrder(order)">
+                        <td v-on:click="openOrder(order.id)"  data-toggle="modal" data-target="#exampleModalScrollable">
                             {{ order.created_at | moment("jYYYY/jM/jD") }}
                         </td>
                     </tr>
