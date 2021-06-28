@@ -48,7 +48,7 @@
                                                         @foreach($middleChildMenu->children as $grandChildMenu)
                                                             <li>
                                                                 <a class="mega-menu__subtitle"
-                                                                   href="{{ $middleChildMenu->link }}">
+                                                                   href="{{ $grandChildMenu->link }}">
                                                                     {{ $grandChildMenu->name }}
                                                                 </a>
                                                             </li>
