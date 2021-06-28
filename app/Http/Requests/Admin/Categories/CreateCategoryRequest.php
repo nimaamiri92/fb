@@ -11,7 +11,7 @@ class CreateCategoryRequest extends BaseRequest
         return [
             'name' => 'required',
             'slug' => "unique:categories",
-            'order' => 'required|numeric|unique:categories|min:1|max:255',
+            'order' => 'required|numeric|unique:categories|min:1|max:2550000',
             'status' => 'required',
             'type' => 'required',
         ];

@@ -10,7 +10,7 @@ class UpdateCategoryRequest extends BaseRequest
     {
         return [
             'name'=>'required',
-            'order'=>'required|numeric|min:1|max:255',
+            'order'=>'required|numeric|min:1|max:2550000',
             'status'=>'required',
             'type'=>'required',
         ];
