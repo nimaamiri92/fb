@@ -4,7 +4,7 @@
 
     <section class="content">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="overflow-x: scroll">
                 <div class="tab-content">
                     <div class="col-md-6">
                         <form class="form-group" method="post"

@@ -17,7 +17,7 @@
                                                 href="#tab_3" data-toggle="tab">ویژگی های محصول</a></li>
                     </ul>
                 </div><!-- /.card-header -->
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: scroll">
                     <div class="tab-content">
                         <div class="tab-pane @if(empty($tab)) active @elseif($tab == 'product_attribute') active @endif"
                              id="tab_1">
@@ -192,7 +192,7 @@
                                                     <!-- /.card-tools -->
                                                 </div>
                                                 <!-- /.card-header -->
-                                                <div class="card-body">
+                                                <div class="card-body" style="overflow-x: scroll">
                                                     <img class="edit-product-image"
                                                          src="{{$image}}">
                                                 </div>
@@ -212,7 +212,7 @@
                                                 class="btn float-left btn-primary btn-lg">{{ trans('attributes.add_attribute') }}</button>
                                     </a>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body" style="overflow-x: scroll">
 
 
                                     <table class="table" class="table table-bordered table-striped">

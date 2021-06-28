@@ -15,13 +15,13 @@
         <div class="col-12">
             <!-- Custom Tabs -->
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: scroll">
                     <div class="tab-content">
                             <form action="{{ route('admin.products.storeAssignAttributes',$product->id) }}" name="assign_attribute" method="post">
                                 {{ @csrf_field() }}
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="card-body">
+                                        <div class="card-body" style="overflow-x: scroll">
                                             <div class="callout callout-info">
                                                 <h5>ویژگی ها</h5>
                                         @foreach($attributes as $attribute)

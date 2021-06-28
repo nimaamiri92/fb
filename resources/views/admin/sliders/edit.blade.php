@@ -26,7 +26,7 @@
                                                 href="#tab_2" data-toggle="tab">عکس اسلایدر</a></li>
                     </ul>
                 </div><!-- /.card-header -->
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: scroll">
                     <div class="tab-content">
                         <div class="tab-pane @if(empty($tab)) active @elseif($tab == 'slider_attribute') active @endif"
                              id="tab_1">

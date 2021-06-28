@@ -4,7 +4,7 @@
 
     <section class="content">
 
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: scroll">
                     <div class="tab-content">
                         <form class="form-group" method="post"
                               action="{{ route('admin.slider.upload_image',$slider->id) }}"

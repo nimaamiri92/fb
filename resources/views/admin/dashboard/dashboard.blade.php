@@ -85,7 +85,7 @@
                         </li>
                     </ul>
                 </div><!-- /.card-header -->
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: scroll">
                     <div class="tab-content p-0">
                         <!-- Morris chart - Sales -->
                         <div class="chart tab-pane active" id="revenue-chart"
@@ -115,7 +115,7 @@
                     </div>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: scroll">
                     <!-- Conversations are loaded here -->
                     <div class="direct-chat-messages">
                         <!-- Message. Default to the left -->
@@ -321,7 +321,7 @@
                     </div>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: scroll">
                     <ul class="todo-list">
                         <li>
                             <!-- drag handle -->
@@ -444,7 +444,7 @@
                     </div>
                     <!-- /.card-tools -->
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: scroll">
                     <div id="world-map" style="height: 250px; width: 100%;"></div>
                 </div>
                 <!-- /.card-body-->
@@ -488,7 +488,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: scroll">
                     <div class="chart" id="line-chart" style="height: 250px;"></div>
                 </div>
                 <!-- /.card-body -->

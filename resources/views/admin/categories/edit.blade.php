@@ -27,7 +27,7 @@
                                             href="#tab_2" data-toggle="tab">عکس دسته بندی </a></li>
                 </ul>
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: scroll">
                     <div class="tab-content">
                         <div class="tab-pane  @if(empty($tab)) active @elseif($tab == 'category_attribute') active @endif"
                              id="tab_1">

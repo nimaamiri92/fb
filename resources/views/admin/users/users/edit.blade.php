@@ -24,7 +24,7 @@
                                                 href="#tab_2" data-toggle="tab">آدرس ها</a></li>
                     </ul>
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: scroll">
                     <div class="tab-content">
                         <div class="tab-pane @if(empty($tab)) active @elseif($tab == 'product_attribute') active @endif"
                              id="tab_1">
@@ -107,8 +107,8 @@
                                         </button>
                                     </a>
                                 </div>
-                                <div class="card-body">
-                                    <table class="table" class="table table-bordered table-striped">
+                                <div class="card-body" style="overflow-x: scroll">
+                                    <table class="table" class="table table-bordered table-striped" >
                                         <thead>
                                         <tr>
                                             <th>ردیف</th>

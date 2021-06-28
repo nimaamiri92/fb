@@ -5,7 +5,7 @@
         <div class="col-12">
             <!-- Custom Tabs -->
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: scroll">
                     <div class="tab-content">
                             <form action="{{ route('admin.admins.store') }}" method="post">
                                 {{ @csrf_field() }}

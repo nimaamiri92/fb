@@ -19,7 +19,7 @@
                         {{ trans('main.feature') }}
                     </h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: scroll">
                     <form action="{{ route('admin.attributes.update',$attribute->id) }}" method="post">
                         @method('patch')
                         @csrf
@@ -61,7 +61,7 @@
                     </h3>
                 </div>
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" style="overflow-x: scroll">
                         @if($attribute->values->count() > 0)
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>

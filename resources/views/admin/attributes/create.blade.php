@@ -19,7 +19,7 @@
 
                     </h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: scroll">
                     <form action="{{ route('admin.attributes.store') }}" method="post">
                         @csrf
                         <div class="row">

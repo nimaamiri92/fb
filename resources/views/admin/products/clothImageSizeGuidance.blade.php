@@ -11,7 +11,7 @@
                                                 href="#tab_2" data-toggle="tab">راهنمای عکس محصول</a></li>
                     </ul>
                 </div><!-- /.card-header -->
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: scroll">
                     <div class="tab-content">
 
                         <div class="tab-pane active "id="tab_2">
@@ -40,7 +40,7 @@
                                             <div class="card card-warning">
 
                                                 <!-- /.card-header -->
-                                                <div class="card-body">
+                                                <div class="card-body" style="overflow-x: scroll">
                                                     <img class="edit-product-image"
                                                          src="{{$image->path}}">
                                                 </div>

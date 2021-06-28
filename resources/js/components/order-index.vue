@@ -39,7 +39,7 @@ html {
     <section class="content">
         <div class="card">
             <!-- /.card-header -->
-            <div class="card-body">
+            <div class="card-body" style="overflow-x: scroll">
                 <!-- SEARCH FORM -->
                 <div class="row">
                     <div class="form-inline col-md-3">
@@ -84,7 +84,7 @@ html {
                 <loading :active.sync="isLoading"
                          :can-cancel="true"
                          :is-full-page="fullPage"></loading>
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example1" class="table table-bordered table-striped" style="overflow-x: scroll">
                     <thead>
                     <tr>
                         <th>شناسه سفارش</th>

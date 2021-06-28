@@ -150,4 +150,5 @@ Route::group(['middleware' => ['auth:admin']], function () {
 
 
     Route::get('contact-us',[ContactUsController::class,'index'])->name('contact-us');
+    Route::get('contact-us/{contactUs}/show',[ContactUsController::class,'show'])->name('contact-us-show');
 });

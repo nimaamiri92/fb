@@ -7,7 +7,7 @@
             <!-- Custom Tabs -->
             <div class="card">
 
-                <div class="card-body">
+                <div class="card-body" style="overflow-x: scroll">
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
                             <form action="{{ route('admin.discount.store') }}" method="post">

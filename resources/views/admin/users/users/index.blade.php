@@ -5,7 +5,7 @@
 
     <section class="content">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="overflow-x: scroll">
                 <form class="form-inline ml-3">
                     <div class="input-group input-group-sm">
                         <input type="text" name="search" method="GET"  action="{{ route('admin.users.index') }}" class="form-control">
@@ -15,7 +15,7 @@
                     </div>
                 </form>
                 <br>
-                <table id="example1" class="table table-bordered table-striped">
+                <table id="example1" class="table table-bordered table-striped" style="overflow-x: scroll">
                     <thead>
                     <tr>
                         <th>ردیف</th>

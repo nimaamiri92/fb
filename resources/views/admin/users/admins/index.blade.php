@@ -14,7 +14,7 @@
         @endcan
 
         <!-- /.card-header -->
-        <div class="card-body">
+        <div class="card-body" style="overflow-x: scroll">
             <!-- SEARCH FORM -->
             <form class="form-inline ml-3">
                 <div class="input-group input-group-sm">
