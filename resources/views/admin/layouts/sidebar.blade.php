@@ -136,6 +136,13 @@
                             </ul>
                         </li>
                     @endcan
+
+                    <li class="nav-item">
+                        <a href="{{ route('admin.contact-us') }}" class="@if($sidebarName == 'contact-us') active @endif nav-link">
+                            <i class="nav-icon fa fa-list-alt text-danger"></i>
+                            <p class="text">تماس با ما</p>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>

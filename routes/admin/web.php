@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\AttributeValuesController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\OrderController;
@@ -146,4 +147,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
         Route::post('/store', [DiscountController::class, 'store'])->name('discount.store');
         Route::delete('/{discount}/delete', [DiscountController::class, 'delete'])->name('discount.delete');
     });
+
+
+    Route::get('contact-us',[ContactUsController::class,'index'])->name('contact-us');
 });
