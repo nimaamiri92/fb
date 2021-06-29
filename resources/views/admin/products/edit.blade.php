@@ -8,8 +8,8 @@
                 <div class="card-header d-flex p-0">
                     <ul class="nav nav-pills ml-auto p-2">
                         <li class="nav-item"><a
-                                class="nav-link @if(empty($tab)) active @elseif($tab == 'product_attribute') active @endif"
-                                href="#tab_1" data-toggle="tab">اطلاعات
+                                    class="nav-link @if(empty($tab)) active @elseif($tab == 'product_attribute') active @endif"
+                                    href="#tab_1" data-toggle="tab">اطلاعات
                                 محصول</a></li>
                         <li class="nav-item"><a class="nav-link @if($tab == 'product_images') active @endif"
                                                 href="#tab_2" data-toggle="tab">عکس محصول</a></li>
@@ -98,9 +98,13 @@
 
                                         <div class="form-group">
                                             <label>جنسیت</label>
-                                            <select class="form-control select2 select2-hidden-accessible  @error('gender') is-invalid @enderror" name="gender"  data-placeholder="نوع جنسیت را مشخص کنید" style="width: 100%;text-align: right" tabindex="-1" aria-hidden="true">
+                                            <select class="form-control select2 select2-hidden-accessible  @error('gender') is-invalid @enderror"
+                                                    name="gender" data-placeholder="نوع جنسیت را مشخص کنید"
+                                                    style="width: 100%;text-align: right" tabindex="-1"
+                                                    aria-hidden="true">
                                                 @foreach(\App\Models\Product::GENDER as $key => $value)
-                                                    <option @if(old('gender',$product->gender)  == $key) selected @endif value="{{ $key }}">{{ $value }}</option>
+                                                    <option @if(old('gender',$product->gender)  == $key) selected
+                                                            @endif value="{{ $key }}">{{ $value }}</option>
                                                 @endforeach
                                             </select>
                                             @error('gender')
@@ -117,15 +121,15 @@
                                             <div class="form-group">
                                                 <label>{{ trans('categories.name') }}</label>
                                                 <select
-                                                    class="form-control select2 select2-hidden-accessible @error('categories') is-invalid @enderror"
-                                                    name="categories[]" multiple=""
-                                                    data-placeholder="یک دسته بندی انتخاب کنید"
-                                                    style="width: 100%;text-align: right" tabindex="-1"
-                                                    aria-hidden="true">
+                                                        class="form-control select2 select2-hidden-accessible @error('categories') is-invalid @enderror"
+                                                        name="categories[]" multiple=""
+                                                        data-placeholder="یک دسته بندی انتخاب کنید"
+                                                        style="width: 100%;text-align: right" tabindex="-1"
+                                                        aria-hidden="true">
                                                     @foreach($categories as $category)
                                                         <option
-                                                            @if(in_array($category->id,old('categories',$product->categories->pluck('id')->toArray()))) selected
-                                                            @endif value="{{ $category->id }}">{{ $category->name }}</option>
+                                                                @if(in_array($category->id,old('categories',$product->categories->pluck('id')->toArray()))) selected
+                                                                @endif value="{{ $category->id }}">{{ $category->name }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('categories')
@@ -136,7 +140,8 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>
-                                                    <input @if(old('featured',$product->featured)) checked @endif name="featured"
+                                                    <input @if(old('featured',$product->featured)) checked
+                                                           @endif name="featured"
                                                            type="checkbox" class="flat-red">
                                                     محصول ویژه
                                                 </label>
@@ -186,7 +191,7 @@
                                                     <div class="card-tools">
                                                         <button type="button" onclick="removeImage({{ $imageId }})"
                                                                 class="btn btn-tool" data-widget="remove"><i
-                                                                class="fa fa-times"></i>
+                                                                    class="fa fa-times"></i>
                                                         </button>
                                                     </div>
                                                     <!-- /.card-tools -->
@@ -222,41 +227,47 @@
                                             <th>Quantity</th>
                                             <th>Price</th>
                                             <th>Attributes</th>
-                                            <th >Remove</th>
+                                            <th>Remove</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($productAttributes as $pa)
                                             @if(!$pa->attributesValues->isEmpty())
                                                 <tr>
-                                                <td width="50">{{ $pa->id }}</td>
-                                                <td width="300">
-                                                    <a href="#" class="editable" name="pirce" data-pk=pk{{ $pa->id }}" data-url="{{ route('admin.products.updateProductQuantityAttribute',['product' =>$product->id,'attribute' => $pa->id]) }}">
-                                                        {{ $pa->quantity }}
-                                                    </a>
-                                                </td>
-                                                <td width="300">
-                                                    <a href="#" class="editable" name="pirce" data-pk=pk{{ $pa->id }}" data-url="{{ route('admin.products.updateProductPriceAttribute',['product' =>$product->id,'attribute' => $pa->id]) }}">
-                                                        {{ $pa->formatted_price }}
-                                                    </a>
-                                                </td>
-                                                <td  width="50">
-                                                    <ul class="list-unstyled">
-                                                        @foreach($pa->attributesValues as $item)
+                                                    <td width="50">{{ $pa->id }}</td>
+                                                    <td width="300">
+                                                        <a href="#" class="editable" name="pirce"
+                                                           data-pk=pk{{ $pa->id }}"
+                                                           data-url="{{ route('admin.products.updateProductQuantityAttribute',['product' =>$product->id,'attribute' => $pa->id]) }}">
+                                                            {{ $pa->quantity }}
+                                                        </a>
+                                                    </td>
+                                                    <td width="300">
+                                                        <a href="#" class="editable" name="pirce"
+                                                           data-pk=pk{{ $pa->id }}"
+                                                           data-url="{{ route('admin.products.updateProductPriceAttribute',['product' =>$product->id,'attribute' => $pa->id]) }}">
+                                                            {{ $pa->formatted_price }}
+                                                        </a>
+                                                    </td>
+                                                    <td width="50">
+                                                        <ul class="list-unstyled">
+                                                            @foreach($pa->attributesValues as $item)
                                                                 <li>
                                                                     <span class="right badge badge-warning">{{ $item->attribute->attribute_name }} : {{ $item->value }}</span>
                                                                 </li>
-                                                        @endforeach
-                                                    </ul>
-                                                </td>
-                                                <td width="20">
-                                                    <form action="" >
-                                                        {{ csrf_field() }}
-                                                        <input type="hidden" name="_method" value="delete">
-                                                        <button  onclick="return confirm('آیا اطمینان دارید؟')"  class="btn btn-md btn-danger" type="submit"> <i class="fa fa-trash"></i></button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                                            @endforeach
+                                                        </ul>
+                                                    </td>
+                                                    <td width="20">
+                                                        <form action="">
+                                                            {{ csrf_field() }}
+                                                            <input type="hidden" name="_method" value="delete">
+                                                            <button onclick="return confirm('آیا اطمینان دارید؟')"
+                                                                    class="btn btn-md btn-danger" type="submit"><i
+                                                                        class="fa fa-trash"></i></button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
                                             @endif
                                         @endforeach
                                         </tbody>
@@ -296,7 +307,7 @@
     {{--                        For Editable table(x-editable)                        --}}
     <script>
         $.ajaxSetup({
-            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
         });
         $.fn.editable.defaults.mode = 'inline';
         $.fn.editable.defaults.ajaxOptions = {type: "PATCH"};
@@ -306,10 +317,26 @@
             title: 'Enter value',
             value: '',
             error: function (errors) {
-                alert(1)
+                alert('Error')
             },
-            success: function(response, newValue) {
-                return {newValue: response['data']['price']};
+            success: function (response, newValue) {
+                var currentUrl = window.location.href;
+                var url = new URL(currentUrl);
+                var tab = url.searchParams.get("tab");
+                console.log(tab);
+                if (tab == null){
+                    console.log('in')
+                    window.location = currentUrl + '?tab=product_attribute_value';
+                }else{
+                    if(tab === 'product_attribute_value'){
+                        window.location = currentUrl;
+                    }else {
+                        window.location = currentUrl + '&tab=product_attribute_value';
+                    }
+
+                }
+
+
             }
         });
     </script>
@@ -321,7 +348,7 @@
 
         $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
             checkboxClass: 'icheckbox_flat-green',
-            radioClass   : 'iradio_flat-green'
+            radioClass: 'iradio_flat-green'
         })
     </script>
 
