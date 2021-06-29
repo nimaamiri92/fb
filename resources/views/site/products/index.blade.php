@@ -18,6 +18,9 @@
                 <div class="active-filters d-none d-md-block">
                     <div class="d-flex justify-content-between py-2 px-3">
                         <p>فیلترها</p>
+                        <button class="btn remove-filters">
+                            حذف فیلتر ها
+                        </button>
                     </div>
                 </div>
                 <div class="filters-wrapper">
@@ -173,6 +176,15 @@
             });
         });
 
+
+        $(document).ready(function () {
+            //load more products through pagination
+            $(".remove-filters").click(function () {
+                $("#loader").addClass('loading');
+                var baseUrl = window.location.origin;
+                window.location = baseUrl + '/product'
+            })
+        });
 
         $(document).ready(function () {
             //load more products through pagination
