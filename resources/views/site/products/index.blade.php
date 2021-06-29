@@ -139,11 +139,8 @@
                                              alt="">
                                         <div class="px-3 pt-3">
                                             @if($product->attributes()->sum('quantity') < 1)
-                                                <div class="price-item " style="text-align: center">
-                                                    <p class="product-list__item__title">{{ $product->product_name }}</p>
-                                                    <span class="price"
-                                                          style="color: #ababab;font-size: 1.286rem;line-height: 1.222;font-weight: 400;margin-top: 20px;"> ـــــــــــــــــــــ  ناموجود   ــــــــــــــــــــــ</span>
-                                                </div>
+                                                <p class="product-list__item__title">{{ $product->product_name }}</p>
+                                                <p class="price" style="color: #ababab;font-size: 1.286rem;line-height: 1.222;font-weight: 400;margin-top: 20px;"> ـــــــــــــــــــــ  ناموجود   ــــــــــــــــــــــ</p>
                                             @else
                                                 <p class="product-list__item__title">{{ $product->product_name }}</p>
                                                 <p class="product-list__item__price">{{ $product->product_price_discount }} تومان</p>
@@ -200,6 +197,7 @@
                             $('#next_page').val(new_page) //set next page to hidden input
                             $.each(response.data.data, function (k, product) {
                                 //html of one product
+                                console.log(product)
                                 var one_product =
                                     '<div class="col-6 col-md-4 my-3">' +
                                     '<div class="product-list__item discount">' +
@@ -229,7 +227,13 @@
 
 
                                 //replace html with dynamic data
-                                one_product = one_product.replace('$productPrice', product.price)
+                                if (product.has_quantity){
+                                    one_product = one_product.replace('$productPrice', product.product_price_discount)
+                                }else{
+                                    one_product = one_product.replace('$productPrice',
+                                    '<p class="price" style="color: #ababab;font-size: 1.286rem;line-height: 1.222;font-weight: 400;margin-top: 20px;"> ـــــــــــــــــــــ  ناموجود   ــــــــــــــــــــــ</p>'
+                                    )
+                                }
                                 one_product = one_product.replace('$productLink', '/product/' + product.id)
                                 one_product = one_product.replace('$productImage', product_image)
                                 one_product = one_product.replace('$productTitle', product.product_name)

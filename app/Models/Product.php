@@ -102,6 +102,11 @@ class Product extends BaseModel
         'featured',
     ];
 
+    protected $appends = [
+        'product_discount',
+        'has_quantity',
+        'product_price_discount',
+    ];
 
     public function scopeActive($query)
     {
@@ -190,7 +195,7 @@ class Product extends BaseModel
 
     public function getProductPriceDiscountAttribute()
     {
-        return ((100 - $this->product_discount) * $this->price) / 100;
+        return round(((100 - $this->product_discount) * $this->price) / 100);
     }
 
     public function getImageAttribute()
@@ -201,6 +206,11 @@ class Product extends BaseModel
     public function getImagesAttribute()
     {
         return $this->morphMany('App\Models\Image', 'imageable')->pluck('path','id');
+    }
+
+    public function getHasQuantityAttribute()
+    {
+        return $this->attributes()->sum('quantity') > 0;
     }
 
 }
