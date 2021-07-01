@@ -60,16 +60,16 @@ class CartRepository extends BaseRepository
                 $listOfProducts[$eachItem->id]['quantity'] = $eachItem->quantity;
                 $listOfProducts[$eachItem->id]['has_enough_entity'] = !$eachItem->has_enough_entity_in_stock;
                 $listOfProducts[$eachItem->id]['zero_entity'] = $eachItem->zero_entity_in_stock;
-                $totalPriceWithDiscount += round($listOfProducts[$eachItem->id]['product_price_discount']) * $listOfProducts[$eachItem->id]['quantity'];
-                $totalPriceWithoutDiscount += round($listOfProducts[$eachItem->id]['product_price']) * $listOfProducts[$eachItem->id]['quantity'];
+                $totalPriceWithDiscount += (int) round($listOfProducts[$eachItem->id]['product_price_discount']) * $listOfProducts[$eachItem->id]['quantity'];
+                $totalPriceWithoutDiscount += (int) round($listOfProducts[$eachItem->id]['product_price']) * $listOfProducts[$eachItem->id]['quantity'];
             }
         }
 
         return [
             'listOfProducts' => $listOfProducts,
-            'totalPriceWithDiscount' => $totalPriceWithDiscount,
-            'totalPriceWithoutDiscount' => $totalPriceWithoutDiscount,
-            'totalDiscount' => $totalPriceWithoutDiscount - $totalPriceWithDiscount,
+            'totalPriceWithDiscount' => (int)$totalPriceWithDiscount,
+            'totalPriceWithoutDiscount' => (int)$totalPriceWithoutDiscount,
+            'totalDiscount' => (int)$totalPriceWithoutDiscount - $totalPriceWithDiscount,
             'cartId' => $cartId,
         ];
     }

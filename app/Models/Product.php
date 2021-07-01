@@ -195,7 +195,7 @@ class Product extends BaseModel
 
     public function getProductPriceDiscountAttribute()
     {
-        return round(((100 - $this->product_discount) * $this->price) / 100);
+        return (int) round(((100 - $this->product_discount) * $this->price) / 100);
     }
 
     public function getImageAttribute()
