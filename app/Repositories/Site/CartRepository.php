@@ -60,8 +60,8 @@ class CartRepository extends BaseRepository
                 $listOfProducts[$eachItem->id]['quantity'] = $eachItem->quantity;
                 $listOfProducts[$eachItem->id]['has_enough_entity'] = !$eachItem->has_enough_entity_in_stock;
                 $listOfProducts[$eachItem->id]['zero_entity'] = $eachItem->zero_entity_in_stock;
-                $totalPriceWithDiscount += $listOfProducts[$eachItem->id]['product_price_discount'];
-                $totalPriceWithoutDiscount += $listOfProducts[$eachItem->id]['product_price'];
+                $totalPriceWithDiscount += round($listOfProducts[$eachItem->id]['product_price_discount']) * $listOfProducts[$eachItem->id]['quantity'];
+                $totalPriceWithoutDiscount += round($listOfProducts[$eachItem->id]['product_price']) * $listOfProducts[$eachItem->id]['quantity'];
             }
         }
 

@@ -34,13 +34,13 @@
                     <p class="pr-3">محصول</p>
                 </div>
                 <div class="col-2">
-                    <p class="text-center">تعداد</p>
-                </div>
-                <div class="col-2">
                     <p class="text-center">قیمت</p>
                 </div>
                 <div class="col-2">
-                    <p class="text-center">قیمت کل با تخفیف</p>
+                    <p class="text-center">تعداد</p>
+                </div>
+                <div class="col-2">
+                    <p class="text-center">قیمت با تخفیف</p>
                 </div>
             </div>
             @foreach($listOfProducts as $key => $cartItem)
@@ -102,9 +102,9 @@
             <div class="cart-summary p-4">
                 <h4 class="cart-summary__title d-none d-md-block">خلاصه</h4>
 
-                <button type="button" class="btn action-btn btn-block mb-0 mt-5" data-toggle="modal" data-target="#clubModal">
-                    باشگاه مشتریان
-                </button>
+{{--                <button type="button" class="btn action-btn btn-block mb-0 mt-5" data-toggle="modal" data-target="#clubModal">--}}
+{{--                    باشگاه مشتریان--}}
+{{--                </button>--}}
 
                 <div class="modal fade" id="clubModal" tabindex="-1" role="dialog" aria-labelledby="clubModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -306,7 +306,6 @@
                         $("#loader").addClass('loading');
                     },
                     success: function(data) {
-                        console.log(data)
                         $("#loader").removeClass('loading');
 
                         let currentVal = parseInt(quantitInput.val(), 10) + parseInt(quantity);
@@ -326,12 +325,11 @@
                             }
 
                         }
-
+                        location.reload();
 
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         $("#loader").removeClass('loading');
-
                     }
                 });
             });

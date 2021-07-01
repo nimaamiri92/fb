@@ -61,7 +61,6 @@ class CartController extends BaseController
 
     public function show()
     {
-//        dd(LLCCGPaymentFacade::sale(123));
         $this->setPageTitle('سبد خرید');
         $this->setCartContent();
 
