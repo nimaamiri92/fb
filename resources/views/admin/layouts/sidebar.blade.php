@@ -143,6 +143,12 @@
                             <p class="text">تماس با ما</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.branch.create') }}" class="@if($sidebarName == 'branch') active @endif nav-link">
+                            <i class="nav-icon fa fa-list-alt text-danger"></i>
+                            <p class="text">شعب ها</p>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>

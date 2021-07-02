@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AddressController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AttributeController;
 use App\Http\Controllers\Admin\AttributeValuesController;
+use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -151,4 +152,6 @@ Route::group(['middleware' => ['auth:admin']], function () {
 
     Route::get('contact-us',[ContactUsController::class,'index'])->name('contact-us');
     Route::get('contact-us/{contactUs}/show',[ContactUsController::class,'show'])->name('contact-us-show');
+    Route::get('branch/create',[BranchController::class,'create'])->name('branch.create');
+    Route::post('branch/store',[BranchController::class,'store'])->name('branch.store');
 });

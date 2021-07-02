@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\Admin\Users\AddressRequest;
+use App\Http\Requests\Admin\Users\BranchRequest;
 use App\Http\Requests\Admin\Users\UpdateAddressRequest;
 use App\Models\Address;
 use App\Models\Site\User;
@@ -52,7 +52,7 @@ class AddressController extends BaseController
         return view('site.dashboard.create-address');
     }
 
-    public function store(AddressRequest $request)
+    public function store(BranchRequest $request)
     {
         $data = $request->validated();
         $user = currentUserObj();

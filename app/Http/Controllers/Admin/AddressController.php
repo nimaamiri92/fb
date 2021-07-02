@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\Admin\Users\AddressRequest;
+use App\Http\Requests\Admin\Users\BranchRequest;
 use App\Models\Site\User;
 use App\Repositories\Admin\CityRepository;
 use App\Repositories\Admin\ProvinceRepository;
@@ -43,7 +43,7 @@ class AddressController extends BaseController
         return view('admin.addresses.create', compact('user', 'provinces'));
     }
 
-    public function store(AddressRequest $request, User $user)
+    public function store(BranchRequest $request, User $user)
     {
         $data = $request->validated();
         $this->userRepository->saveUserAddress($user, $data);

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\Admin\Users\AddressRequest;
+use App\Http\Requests\Admin\Users\BranchRequest;
 use App\Http\Requests\Admin\Users\UpdateAddressRequest;
 use App\Http\Requests\Site\ContactUsRequest;
 use App\Models\Address;
