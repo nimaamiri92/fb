@@ -90,7 +90,7 @@ Route::group(['middleware' => ['auth:site'], 'as' => 'site.'], function () {
 
 Route::get('about-us',[HomeController::class,'aboutUs'])->name('site.about-us');
 Route::get('contact-us',[ContactUsController::class,'create'])->name('site.contact-us.create');
-Route::get('branches',[BranchControllers::class,'index'])->name('site.branch.create');
+Route::get('branches',[BranchControllers::class,'index'])->name('site.branch.index');
 Route::post('contact-us/store',[ContactUsController::class,'store'])->name('site.contact-us.store');
 
 

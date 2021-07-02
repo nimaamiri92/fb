@@ -123,7 +123,7 @@
                         </a>
                     </li>
                     <li class="text-right mb-2">
-                        <a href="">
+                        <a href=" {{ route('site.branch.index') }}">
                             آدرس فروشگاه
                         </a>
                     </li>
