@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Site\AddressController;
+use App\Http\Controllers\Site\ContactUsController;
 use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Site\CartController;
 use App\Http\Controllers\Site\OrderController;
@@ -87,6 +88,8 @@ Route::group(['middleware' => ['auth:site'], 'as' => 'site.'], function () {
 });
 
 Route::get('about-us',[HomeController::class,'aboutUs'])->name('site.about-us');
+Route::get('contact-us',[ContactUsController::class,'create'])->name('site.contact-us.create');
+Route::post('contact-us/store',[ContactUsController::class,'store'])->name('site.contact-us.store');
 
 
 Route::get('tt', [\App\Http\Controllers\ZahraController::class, 'index']);//dont remove it,its for Zahra

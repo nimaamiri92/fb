@@ -10,6 +10,6 @@ class ZahraController extends BaseController
     public function index()
     {
         $this->setPageTitle('فروشگاه اینترنتی بی سی سی');
-        return view('site.layouts.about-us');
+        return view('site.layouts.contact-us');
     }
 }

@@ -146,5 +146,6 @@ return [
         "address_id" => "آدرس",
         "shipment_id" => "نحوه ارسال",
         "section" => "بخش",
+        "message" => "پیام",
     ],
 ];

@@ -17,18 +17,18 @@ use Illuminate\Support\Facades\DB;
 
 class ContactUsController extends BaseController
 {
-    public function __construct()
-    {
-
-    }
-
     public function create()
     {
-        //show form
+        $this->setPageTitle('تماس با ما');
+        $this->setCartContent();
+        return view('site.layouts.contact-us');
     }
     public function store(ContactUsRequest $request)
     {
+        $this->setPageTitle('تماس با ما');
+        $this->setCartContent();
         $data = $request->validated();
         ContactUs::query()->create($data);
+        return redirect()->route('site.contact-us.create')->with('message', 'پیام شما با موفقیت ثبت شد.');
     }
 }
