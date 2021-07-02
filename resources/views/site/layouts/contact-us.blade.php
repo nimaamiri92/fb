@@ -138,7 +138,7 @@
 <script>
     $(document).ready(() => {
         let map = new L.Map('locationMap', {
-            key: 'web.f2keDRcqhiPMFDO9dS4qbSLsEiz93ePPeT4etCMT',
+            key: 'web.UMNI96LA8ZJNbENYtcMWySXUkLpfSGOgqn0Bhu2K',
             maptype: 'standard-day',
             poi: true,
             center: [35.69746, 51.40123],

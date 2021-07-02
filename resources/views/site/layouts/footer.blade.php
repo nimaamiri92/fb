@@ -118,7 +118,7 @@
                 </h4>
                 <ul class="list-unstyled p-0">
                     <li class="text-right mb-2">
-                        <a href="">
+                        <a href="{{ route('site.contact-us.create') }}">
                             تماس با ما
                         </a>
                     </li>
