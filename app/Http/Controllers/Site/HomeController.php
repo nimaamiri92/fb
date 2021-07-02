@@ -53,4 +53,13 @@ class HomeController extends BaseController
         $response = $this->productRepository->search($keyword);
         return response()->json(['result' => $response], 200);
     }
+
+    public function aboutUs()
+    {
+        $this->setPageTitle('فروشگاه اینترنتی بی سی سی');
+        $this->setCartContent();
+        return view('site.layouts.about-us');
+    }
+
+
 }

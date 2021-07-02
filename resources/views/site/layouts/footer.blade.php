@@ -69,7 +69,7 @@
                 </h4>
                 <ul class="list-unstyled p-0">
                     <li class="text-right mb-2">
-                        <a href="">
+                        <a href="{{ route('site.about-us') }}">
                             درباره بی سی سی
                         </a>
                     </li>

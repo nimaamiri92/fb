@@ -86,5 +86,7 @@ Route::group(['middleware' => ['auth:site'], 'as' => 'site.'], function () {
         ->name('dashboard.order-history-details');
 });
 
+Route::get('about-us',[HomeController::class,'aboutUs'])->name('site.about-us');
+
 
 Route::get('tt', [\App\Http\Controllers\ZahraController::class, 'index']);//dont remove it,its for Zahra
