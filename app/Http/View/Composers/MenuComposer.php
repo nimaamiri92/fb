@@ -11,7 +11,7 @@ class MenuComposer
     {
         $view->with('menus', Category::with('children')
             ->whereIn('type', [Category::MENU])
-            ->where('status', 1)
+            ->where('status', Category::ACTIVE)
             ->orderBy('order', 'asc')
             ->get());
     }

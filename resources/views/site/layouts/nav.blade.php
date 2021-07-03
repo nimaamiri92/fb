@@ -28,33 +28,37 @@
                                     <div class="d-flex">
                                         <div class="row flex-grow-1">
                                             @foreach($menu->children as $middleChildMenu)
-                                                <div class="col-lg col-12 pt-3 pt-lg-0 d-flex flex-column">
-                                                    <div
-                                                            class="d-flex d-lg-inline-block justify-content-between align-items-center mega-menu__title text-md-right">
-                                                        <a class="" href="{{ $middleChildMenu->link }}">
-                                                            {{ $middleChildMenu->name }}
-                                                        </a>
-                                                        @if($middleChildMenu->children->count() > 0)
-                                                            <button
-                                                                    class="btn d-inline-block d-lg-none navbar__item__btn collapsed"
-                                                                    data-target="#menu-{{ $middleChildMenu->slug }}"
-                                                                    data-toggle="collapse">
-                                                                <i class="fas fa-angle-up"></i>
-                                                            </button>
-                                                        @endif
+                                                @if($middleChildMenu->status)
+                                                    <div class="col-lg col-12 pt-3 pt-lg-0 d-flex flex-column">
+                                                        <div
+                                                                class="d-flex d-lg-inline-block justify-content-between align-items-center mega-menu__title text-md-right">
+                                                            <a class="" href="{{ $middleChildMenu->link }}">
+                                                                {{ $middleChildMenu->name }}
+                                                            </a>
+                                                            @if($middleChildMenu->children->count() > 0)
+                                                                <button
+                                                                        class="btn d-inline-block d-lg-none navbar__item__btn collapsed"
+                                                                        data-target="#menu-{{ $middleChildMenu->slug }}"
+                                                                        data-toggle="collapse">
+                                                                    <i class="fas fa-angle-up"></i>
+                                                                </button>
+                                                            @endif
+                                                        </div>
+                                                        <ul class="list-unstyled collapse"
+                                                            id="menu-{{ $middleChildMenu->slug }}">
+                                                            @foreach($middleChildMenu->children as $grandChildMenu)
+                                                                @if($grandChildMenu->status)
+                                                                    <li>
+                                                                        <a class="mega-menu__subtitle"
+                                                                           href="{{ $grandChildMenu->link }}">
+                                                                            {{ $grandChildMenu->name }}
+                                                                        </a>
+                                                                    </li>
+                                                                @endif
+                                                            @endforeach
+                                                        </ul>
                                                     </div>
-                                                    <ul class="list-unstyled collapse"
-                                                        id="menu-{{ $middleChildMenu->slug }}">
-                                                        @foreach($middleChildMenu->children as $grandChildMenu)
-                                                            <li>
-                                                                <a class="mega-menu__subtitle"
-                                                                   href="{{ $grandChildMenu->link }}">
-                                                                    {{ $grandChildMenu->name }}
-                                                                </a>
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
+                                                @endif
                                             @endforeach
                                         </div>
                                         @if($menu->image)

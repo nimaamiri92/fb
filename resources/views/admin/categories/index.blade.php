@@ -14,14 +14,14 @@
             <!-- /.card-header -->
             <div class="card-body" style="overflow-x: scroll">
                 <!-- SEARCH FORM -->
-                <form class="form-inline ml-3">
-                    <div class="input-group input-group-sm">
-                        <input type="text" class="form-control">
-                        <span class="input-group-append">
-                    <button type="button" class="btn btn-info btn-flat">{{ trans('main.search') }}</button>
-                  </span>
-                    </div>
-                </form>
+{{--                <form class="form-inline ml-3">--}}
+{{--                    <div class="input-group input-group-sm">--}}
+{{--                        <input type="text" class="form-control">--}}
+{{--                        <span class="input-group-append">--}}
+{{--                    <button type="button" class="btn btn-info btn-flat">{{ trans('main.search') }}</button>--}}
+{{--                  </span>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
                 <br>
                 <table id="example1" class="table table-bordered table-striped" style="overflow-x: scroll">
                     <thead>
