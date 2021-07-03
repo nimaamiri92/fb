@@ -79,7 +79,7 @@ class OrderService
                 ProductAttribute::query()->where('id', $eachCartItem['product_attribute_id'])->decrement('quantity', $eachCartItem['quantity']);
             }
 
-            RemoveStockEntityBaseOnTheOrderJob::dispatch($cartData)->delay(now()->addMinutes(1));
+            RemoveStockEntityBaseOnTheOrderJob::dispatch($cartData)->delay(now()->addMinutes(15));
 
             DB::commit();
         } catch (Exception $exception) {
