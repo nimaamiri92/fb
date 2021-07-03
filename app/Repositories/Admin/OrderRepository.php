@@ -20,9 +20,17 @@ class OrderRepository extends BaseRepository
             ->newQuery()
             ->with('user');
 
+        //it is date format,sorry for this type of coding
+        //business at the sudden what something!!!!
+        if (!empty($filter['search'])){
+            if (count(explode('/',$filter['search'])) > 2){
+                $filter['search'] = convertToGregorian(explode('/',$filter['search']))->format('Y-m-d');
+            }
+        }
+
         $query->magicQuery(
             $filter,
-            ['relation_user__name','relation_user__mobile','name_of_receiver','address','phone','id'],
+            ['relation_user__name','relation_user__mobile','name_of_receiver','address','phone','id','created_at'],
             ['created_at', 'id','order_state','payment_status'],
             ['order_state','payment_status']
         );
