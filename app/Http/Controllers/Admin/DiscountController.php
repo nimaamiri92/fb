@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Admin\Discounts\CreateDiscountRequest;
+use App\Http\Requests\Admin\Discounts\UpdateDiscountRequest;
 use App\Models\Category;
 use App\Models\Discount;
 use App\Models\Product;
@@ -64,5 +65,21 @@ class DiscountController extends BaseController
     {
         $discount->delete();
         return redirect()->route('admin.discount.index', $discount->id)->with('message', trans('discount.discount_removed_successfully'));
+    }
+
+
+    public function edit(Discount $discount)
+    {
+        $this->setPageTitle('ویرایش تخفیف');
+        $this->setSideBar('discounts');
+        return view('admin.discount.edit',compact('discount'));
+    }
+
+    public function update(Discount $discount,UpdateDiscountRequest $request)
+    {
+        $this->setPageTitle('ویرایش تخفیف');
+        $this->setSideBar('discounts');
+        $this->discountRepository->update($request->validated(),$discount->id);
+        return redirect()->route('admin.discount.index')->with('message', 'تخفیف با موفقیت ویرایش شد');
     }
 }

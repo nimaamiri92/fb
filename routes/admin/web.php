@@ -147,6 +147,8 @@ Route::group(['middleware' => ['auth:admin']], function () {
         Route::get('/create', [DiscountController::class, 'create'])->name('discount.create');
         Route::post('/store', [DiscountController::class, 'store'])->name('discount.store');
         Route::delete('/{discount}/delete', [DiscountController::class, 'delete'])->name('discount.delete');
+        Route::patch('/{discount}/update', [DiscountController::class, 'update'])->name('discount.update');
+        Route::get('/{discount}/edit', [DiscountController::class, 'edit'])->name('discount.edit');
     });
 
 

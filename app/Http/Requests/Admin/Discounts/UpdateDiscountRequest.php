@@ -11,11 +11,8 @@ class UpdateDiscountRequest extends BaseRequest
         return [
             'title'=>'required',
             'percent'=>'required',
-            'type'=>'required',
             'start_date'=>'required',
-            'end_date'=>'required',
-            'discountable_id'=>'',
-            'discountable_type'=>'',
+            'end_date'=>'required'
         ];
     }
 

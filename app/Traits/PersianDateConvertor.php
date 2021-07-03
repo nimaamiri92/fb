@@ -10,7 +10,7 @@ trait PersianDateConvertor
     public function formatToJalali($functionName)
     {
         $selectedAttribute = $this->getMutatorMethod($functionName);
-        return verta($this->getAttributeFromArray($selectedAttribute))->format('Y-n-j');
+        return verta($this->getAttributeFromArray($selectedAttribute))->format('Y/n/j');
     }
 
     private static function getMutatorMethod($functionName)

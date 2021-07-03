@@ -25,7 +25,7 @@ class DiscountRepository extends BaseRepository
     public function list($paginate = false, string $order = 'id', string $sort = 'desc', array $columns = ['*'])
     {
         if ($paginate) {
-            $data = $this->paginate($columns, $order, $sort);
+            $data = Discount::query()->with('discountable')->orderBy($order,$sort)->paginate(config('custom_config.pagination.per_page'));
         } else {
             $data = $this->groupBy('title')->all($columns, $order, $sort);
         }
@@ -121,4 +121,17 @@ class DiscountRepository extends BaseRepository
     {
         return $discount->delete();
     }
+
+
+    public function update(array $attributes, int $id) :bool
+    {
+        return Discount::query()->where('id',$id)->update([
+            'title' => $attributes['title'],
+            'percent' => $attributes['percent'],
+            'start_date' => convertToGregorian(explode('/', $attributes['start_date'])),
+            'end_date' => convertToGregorian(explode('/', $attributes['end_date'])),
+        ]);
+
+    }
+
 }

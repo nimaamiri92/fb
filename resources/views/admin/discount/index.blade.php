@@ -30,9 +30,11 @@
                         <th>{{ trans('discount.title') }}</th>
                         <th>{{ trans('discount.percent') }}</th>
                         <th>{{ trans('discount.type') }}</th>
+                        <th>نام تخفیف خورده</th>
                         <th>{{ trans('discount.start_date') }}</th>
                         <th>{{ trans('discount.end_date') }}</th>
                         <th>{{ trans('discount.status') }}</th>
+                        <th>ویرایش</th>
                         <th>{{ trans('main.delete') }}</th>
                     </tr>
                     </thead>
@@ -43,16 +45,28 @@
                             <td>{{ $discount->title }}</td>
                             <td>{{ $discount->percent }}</td>
                             <td>{{ $discount->type}}</td>
+                            <td>{{ $discount->discountable->name}}</td>
                             <td>{{ $discount->start_date }}</td>
                             <td>{{ $discount->end_date }}</td>
                             <td>{{ $discount->status == 1 ? "فعال" : "غیرفعال" }}</td>
+                            <td width="20">
+                                @can('update', \App\Models\Discount::class)
+                                    <a class="btn btn-md btn-warning" href="{{ route('admin.discount.edit',$discount->id) }}">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                @elsecan('view',\App\Models\Discount::class)
+                                    <button class="btn btn-md btn-warning" disabled title="شما دسترسی ندارید">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                @endcan
+                            </td>
                             <td width="20">
                                 @can('delete', \App\Models\Discount::class)
                                     <form action="{{ route('admin.discount.delete',$discount->id) }}" method="post">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="delete">
                                         <button onclick="return confirm('آیا اطمینان دارید؟')"
-                                                class="btn btn-lg btn-danger" type="submit"><i class="fa fa-trash"></i>
+                                                class="btn btn-md btn-danger" type="submit"><i class="fa fa-trash"></i>
                                         </button>
                                         <a class="btn btn-lg"
                                            href="{{ route('admin.discount.delete',$discount->id) }}"> </a>
