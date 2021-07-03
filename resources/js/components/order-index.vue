@@ -120,7 +120,7 @@ html {
 
 
         <!--  Invoice PDF   -->
-        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"  style="z-index: 100000"
              aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
                 <div class="modal-content">
@@ -139,6 +139,7 @@ html {
                             <button v-on:click="approvedOrders([show_order.id])" type="button" class="btn btn-success">تایید سفارش</button>
                         </p>
                         <p style="font-size: 20px;">سفارشات</p>
+                        <p style="font-size: 15px; color: grey">{{ this.show_order.name_of_receiver}}</p>
                         <table class="table table-bordered" style="margin-bottom: 35px;">
                             <tbody>
                             <tr>
@@ -354,6 +355,10 @@ export default {
         setOrderFilters() {
             this.order_state_filter_option = [
                 {
+                    "id": "EMPTY",
+                    "text": 'انتخاب کنید'
+                },
+                {
                     "id": "APPROVED",
                     "text": this.order_states.APPROVED.text
                 },
@@ -369,6 +374,10 @@ export default {
         },
         setPaymentFilters() {
             this.payment_status_filter_option = [
+                {
+                    "id": "EMPTY",
+                    "text": 'انتخاب کنید'
+                },
                 {
                     "id": "FAIL_PAYMENT",
                     "text": this.payment_statuses.FAIL_PAYMENT.text

@@ -20,6 +20,16 @@ class OrderRepository extends BaseRepository
             ->newQuery()
             ->with('user');
 
+        if (!empty($filter['order_state'])){
+            if ($filter['order_state'] === "EMPTY"){
+                unset($filter['order_state']);
+            }
+        }
+        if (!empty($filter['payment_status'])){
+            if ($filter['payment_status'] === "EMPTY"){
+                unset($filter['payment_status']);
+            }
+        }
         //it is date format,sorry for this type of coding
         //business at the sudden what something!!!!
         if (!empty($filter['search'])){
