@@ -55,7 +55,7 @@ class CartController extends BaseController
             $this->showErrorPage(400);
         }
 
-        return redirect(route('site.product.show', ['product' => $product->id]));
+        return redirect()->route('site.product.show', ['product' => $product->id])->with('message', 'محصول با موفقیت به سبد شما اضافه شد.');;
     }
 
 
