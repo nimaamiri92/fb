@@ -55,9 +55,9 @@
                 </div>
             </div>
             <div class="col-12 d-flex justify-content-center">
-                <button class="btn action-btn">
+                <a href="{{ route('site.product.index') }}" class="btn action-btn">
                     خرید
-                </button>
+                </a>
             </div>
         </div>
         @if(!empty($slides = $sliders[\App\Models\Slider::HOME_MIDDLE]))
