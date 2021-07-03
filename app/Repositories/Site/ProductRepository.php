@@ -138,7 +138,7 @@ class ProductRepository extends BaseRepository
         return $this->model
             ->with('image')
             ->where('product_name', 'like', "%$keyword%")
-            ->orderBy('updated_at')
+            ->inRandomOrder()
             ->simplePaginate(5)->items();
     }
 }

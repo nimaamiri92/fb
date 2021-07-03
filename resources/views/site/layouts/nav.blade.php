@@ -123,19 +123,20 @@
                         success: function (data) {
                             $('.search-suggestions').addClass('show');
                             var  output = '';
-                            var li = '<li class="d-flex border-bottom p-3">' +
-                                '<img class="ml-3" src="$product_image" alt="">' +
-                                '<div class="d-flex flex-column justify-content-between">' +
-                                '<a class="search-suggestion">' +
-                                '<span class="suggestion-title">$product_title</span>' +
-                                '</a>' +
-                                '</div>' +
-                                '</li>';
-                            console.log(data.result)
-                            $.each( data.result, function( key, value ) {
 
+                            $.each( data.result, function( key, value ) {
+                                var li = '<li class="d-flex border-bottom p-3">' +
+                                    '<img class="ml-3" src="$product_image" alt="">' +
+                                    '<div class="d-flex flex-column justify-content-between">' +
+                                    '<a class="search-suggestion" href="$url">' +
+                                    '<span class="suggestion-title">$product_title</span>' +
+                                    '</a>' +
+                                    '</div>' +
+                                    '</li>';
+                                console.log(value.image.path)
                                 li = li.replace("$product_image", value.image.path);
                                 li = li.replace("$product_title", value.product_name);
+                                li = li.replace("$url", 'product/' + value.id);
                                 output += li
                             });
 
