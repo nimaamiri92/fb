@@ -105,11 +105,6 @@
                             راهنمای انتخاب سایز
                         </a>
                     </li>
-                    <li class="text-right mb-2">
-                        <a href="">
-                            باشگاه مشتریان
-                        </a>
-                    </li>
                 </ul>
             </div>
             <div class="col-3 col-lg-2">
