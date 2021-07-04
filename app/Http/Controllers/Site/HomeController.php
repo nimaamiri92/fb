@@ -50,7 +50,7 @@ class HomeController extends BaseController
         if (!$keyword){
             return response()->json([], 200);
         }
-        $response = $this->productRepository->search($keyword);
+        $response = $this->productRepository->search(convertArabicCharacters($keyword));
         return response()->json(['result' => $response], 200);
     }
 
