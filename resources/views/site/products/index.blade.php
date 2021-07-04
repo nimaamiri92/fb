@@ -6,7 +6,7 @@
             <div class="col-12">
                 <div aria-label="breadcrumb">
                     <ol class="breadcrumb bg-white">
-                        <li class="breadcrumb-item"><a href="#">خانه</a></li>
+                        <li class="breadcrumb-item"><a href="/">خانه</a></li>
                         <li class="breadcrumb-item active" aria-current="page">محصولات</li>
                     </ol>
                 </div>
