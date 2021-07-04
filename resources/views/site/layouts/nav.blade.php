@@ -63,7 +63,7 @@
                                         </div>
                                         @if($menu->image)
                                             <div class="d-none d-lg-flex mr-lg-5">
-                                                <img class="mega-menu__image" src="{{ $menu->image}}"
+                                                <img class="mega-menu__image" src="{{ $menu->image}}" width="590" height="330"
                                                      alt="">
                                             </div>
                                         @endif
