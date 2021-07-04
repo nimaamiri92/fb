@@ -75,7 +75,7 @@
                 @endforeach
             </div>
             <div class="d-flex navbar__search-wrapper align-items-center">
-                <form class="flex-1 search-form" id="searchForm" action="">
+                <form class="flex-1 search-form" id="searchForm" onsubmit="return mySubmitFunction(event)">
                     <div class="navbar__search d-flex align-items-center" id="dropdownMenuButton"
                          aria-haspopup="true" aria-expanded="false">
                         <i class="icon fas fa-search ml-2"></i>
@@ -105,7 +105,10 @@
 
 @push('scripts')
     <script>
-
+        function mySubmitFunction(e) {
+            e.preventDefault();
+            return false;
+        }
         /*
         * Its your fault, you dont pay the project money than I will use mysql for your search instead of Elasticsearch!!!
         * */
