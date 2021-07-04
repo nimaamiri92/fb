@@ -105,6 +105,11 @@
                             راهنمای انتخاب سایز
                         </a>
                     </li>
+                    <li class="text-right mb-2">
+                        <a href="{{ route('site.transfer') }}">
+حمل و نقل
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="col-3 col-lg-2">
