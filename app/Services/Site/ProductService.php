@@ -12,7 +12,7 @@ class ProductService
         $result = $productAttribute->load(['product']);
 
         if ($result->product['product_discount'] > 0) {
-            $priceWithDiscount =  round($result->price * (100 - $result->product['product_discount'])) / 100;
+            $priceWithDiscount =  round(($result->price * (100 - $result->product['product_discount'])) / 100);
         } else {
             $priceWithDiscount = $result->price;
         }

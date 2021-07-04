@@ -20,7 +20,11 @@ class ProductRepository extends BaseRepository
     public function show(Product $product)
     {
         return $this->model->newQuery()
-            ->with(['attributes.attributesValues', 'categories', 'discount'])
+            ->with(['attributes'=> function ($query) {
+                $query->where('quantity', '>', 0);
+                $query->with('attributesValues');
+            }])
+            ->with(['categories', 'discount'])
             ->whereHas('categories')
             ->whereHas('attributes.attributesValues')
             ->findOrFail($product->id);
@@ -79,11 +83,10 @@ class ProductRepository extends BaseRepository
         });
 
 
-        $hasNotQuantity = $products->where('has_quantity',false);
-        $hasQuantity = $products->where('has_quantity',true);
+        $hasNotQuantity = $products->where('has_quantity', false);
+        $hasQuantity = $products->where('has_quantity', true);
         $products = $hasQuantity->concat($hasNotQuantity);
-        return $products->paginate(15,$products->count(),$filters['page'] ?? 1);
-
+        return $products->paginate(15, $products->count(), $filters['page'] ?? 1);
 
 
         //order by somethings
