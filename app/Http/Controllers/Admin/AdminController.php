@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Requests\Admin\AdminUsers\CreateAdminUserRequest;
+use App\Models\Role;
 use App\Models\Site\User;
 use App\Repositories\Admin\AdminUserRepository;
 use App\Repositories\Admin\RoleRepository;

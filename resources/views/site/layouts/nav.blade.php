@@ -38,14 +38,14 @@
                                                             @if($middleChildMenu->children->count() > 0)
                                                                 <button
                                                                         class="btn d-inline-block d-lg-none navbar__item__btn collapsed"
-                                                                        data-target="#menu-{{ $middleChildMenu->slug }}"
+                                                                        data-target="#menu-{{ $middleChildMenu->id }}"
                                                                         data-toggle="collapse">
                                                                     <i class="fas fa-angle-up"></i>
                                                                 </button>
                                                             @endif
                                                         </div>
                                                         <ul class="list-unstyled collapse"
-                                                            id="menu-{{ $middleChildMenu->slug }}">
+                                                            id="menu-{{ $middleChildMenu->id }}">
                                                             @foreach($middleChildMenu->children as $grandChildMenu)
                                                                 @if($grandChildMenu->status)
                                                                     <li>
