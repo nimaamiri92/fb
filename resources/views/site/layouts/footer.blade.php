@@ -91,7 +91,7 @@
                 </h4>
                 <ul class="list-unstyled p-0">
                     <li class="text-right mb-2">
-                        <a href="">
+                        <a href="{{ route('site.transfer') }}">
                             نحوه ارسال
                         </a>
                     </li>
@@ -103,11 +103,6 @@
                     <li class="text-right mb-2">
                         <a href="{{ route('site.size-guide') }}">
                             راهنمای انتخاب سایز
-                        </a>
-                    </li>
-                    <li class="text-right mb-2">
-                        <a href="{{ route('site.transfer') }}">
-حمل و نقل
                         </a>
                     </li>
                 </ul>
