@@ -94,4 +94,13 @@ Route::get('branches',[BranchControllers::class,'index'])->name('site.branch.ind
 Route::post('contact-us/store',[ContactUsController::class,'store'])->name('site.contact-us.store');
 
 
+Route::get('certificates', function () {
+    return view('site.layouts.certificates');
+})->name('site.certificates');
+
+Route::get('help', function () {
+    return view('site.layouts.help');
+})->name('site.help');
+
+
 Route::get('tt', [\App\Http\Controllers\ZahraController::class, 'index']);//dont remove it,its for Zahra

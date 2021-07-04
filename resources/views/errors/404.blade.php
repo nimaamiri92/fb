@@ -1,5 +1,34 @@
-@extends('errors::minimal')
-
-@section('title', __('Not Found'))
-@section('code', '404')
-@section('message', __('Not Found'))
+@extends('site.app')
+@section('title')صفحه مورد نظر پیدا نشد! @endsection
+@section('content')
+    <div class="page-content">
+        <div class="row justify-content-center not-found">
+            <div class="col-12 d-flex flex-column align-items-center">
+                <h1 class="page-title">
+                    404
+                </h1>
+                <h3>
+                    متاسفانه صفحه‌ای که دنبال آن بودید پیدا نشد!
+                </h3>
+            </div>
+            <div class="col-12 col-md-6" style="margin-top:80px;">
+                <div class="row">
+                    <div class="col-md-4">
+                        <a class="btn action-btn w-100" href="/">
+                            صفحه اصلی
+                        </a></div>
+                    <div class="col-md-4" href="/product">
+                        <a class="btn action-btn w-100">
+                            لیست محصولات
+                        </a></div>
+                    <div class="col-md-4">
+                        <a class="btn action-btn w-100" href="/dashboard">
+                            پروفایل کاربری
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+@endsection

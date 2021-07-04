@@ -40,7 +40,7 @@ textarea:focus {
 }
 
 .block-page.loading {
-    display: flex;
+    display: flex !important;
     justify-content: center;
     align-items: center;
     z-index: 15;
@@ -268,7 +268,7 @@ input[type=number] {
     height: 100%;
     width: 100%;
     padding: 10px;
-    /*box-shadow: 0 0 0 1px #aeaeae inset;*/
+    box-shadow: 0 0 0 1px #aeaeae inset;
 }
 
 .patterns-list__item__title {
@@ -1694,11 +1694,13 @@ select.shipping-method {
     color: #687179;
 }
 
+.text-pre-line{
+    white-space: pre-line;
+}
+
 .validation-error {
     width: 100%;
     margin-top: .25rem;
     font-size: 80%;
     color: #dc3545;
 }
-
-/*# sourceMappingURL=styles.css.map */

@@ -74,12 +74,12 @@
                         </a>
                     </li>
                     <li class="text-right mb-2">
-                        <a href="">
+                        <a href="{{ route('site.certificates') }}">
                             گواهینامه
                         </a>
                     </li>
                     <li class="text-right mb-2">
-                        <a href="">
+                        <a href="{{ route('site.help') }}">
                             راهنما
                         </a>
                     </li>
@@ -133,19 +133,19 @@
         <div class="row justify-content-center mb-5">
             <div class="footer-images col-12 d-flex justify-content-center flex-wrap">
                 <a href="">
-                    <img src="https://bccstyle.com/uploads/enamad11564360441.png" alt="">
+                    <img src="/site/images/certificate1.png" alt="">
                 </a>
                 <a href="">
-                    <img src="https://bccstyle.com/uploads/enamad21564360464.png" alt="">
+                    <img src="/site/images/certificate2.png" alt="">
                 </a>
                 <a href="">
-                    <img src="https://bccstyle.com/uploads/IAF-min1564994281.png" alt="">
+                    <img src="/site/images/certificate3.png" alt="">
                 </a>
                 <a href="">
-                    <img src="https://bccstyle.com/uploads/logofooter21564360522.png" alt="">
+                    <img src="/site/images/certificate4.png" alt="">
                 </a>
                 <a href="">
-                    <img src="https://bccstyle.com/uploads/inspection_quad_et_noaccreditation-min1564994247.png" alt="">
+                    <img src="/site/images/certificate5.png" alt="">
                 </a>
             </div>
         </div>
