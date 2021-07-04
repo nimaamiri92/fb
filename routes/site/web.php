@@ -101,6 +101,9 @@ Route::get('certificates', function () {
 Route::get('help', function () {
     return view('site.layouts.help');
 })->name('site.help');
+Route::get('size-guide', function () {
+    return view('site.layouts.size-guide');
+})->name('site.size-guide');
 
 
 Route::get('tt', [\App\Http\Controllers\ZahraController::class, 'index']);//dont remove it,its for Zahra

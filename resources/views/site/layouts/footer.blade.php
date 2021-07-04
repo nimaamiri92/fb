@@ -101,7 +101,7 @@
                         </a>
                     </li>
                     <li class="text-right mb-2">
-                        <a href="">
+                        <a href="{{ route('site.size-guide') }}">
                             راهنمای انتخاب سایز
                         </a>
                     </li>
