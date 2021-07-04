@@ -107,59 +107,67 @@
     <script>
         function mySubmitFunction(e) {
             e.preventDefault();
+            search();
             return false;
         }
         /*
         * Its your fault, you dont pay the project money than I will use mysql for your search instead of Elasticsearch!!!
         * */
+
+
+
+        function search()
+        {
+            var keyword = this.value;
+
+            if (keyword.length === 0){
+                $('.search-suggestions').removeClass('show');
+            }
+
+
+            if (keyword.length > 2) {
+                $.get({
+                    url: "/api/search?search=" + keyword,
+                    beforeSend: function () {
+                        $("#loader").addClass('loading');
+                    },
+                    success: function (data) {
+                        $('.search-suggestions').addClass('show');
+                        var  output = '';
+
+                        $.each( data.result, function( key, value ) {
+                            var li = '<li class="d-flex border-bottom p-3">' +
+                                '<img class="ml-3" src="$product_image" alt="">' +
+                                '<div class="d-flex flex-column justify-content-between">' +
+                                '<a class="search-suggestion" href="$url">' +
+                                '<span class="suggestion-title">$product_title</span>' +
+                                '</a>' +
+                                '</div>' +
+                                '</li>';
+                            console.log(value.image.path)
+                            li = li.replace("$product_image", value.image.path);
+                            li = li.replace("$product_title", value.product_name);
+                            li = li.replace("$url", 'product/' + value.id);
+                            output += li
+                        });
+
+
+                        $('#searchResponse').html(output);
+                        $("#loader").removeClass('loading');
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        // $('#add_to_cart').css("background-color", "red");
+                        // $('#add_to_cart').text("خطایی رخ داده!!!");
+                        // $('#add_to_cart').prop('disabled', true);
+
+                        $("#loader").removeClass('loading');
+                    }
+                });
+            }
+        }
         $(document).ready(function () {
             $("#siteSearch").keyup(function () {
-                var keyword = this.value;
 
-                if (keyword.length === 0){
-                    $('.search-suggestions').removeClass('show');
-                }
-
-
-                if (keyword.length > 2) {
-                    $.get({
-                        url: "/api/search?search=" + keyword,
-                        beforeSend: function () {
-                            $("#loader").addClass('loading');
-                        },
-                        success: function (data) {
-                            $('.search-suggestions').addClass('show');
-                            var  output = '';
-
-                            $.each( data.result, function( key, value ) {
-                                var li = '<li class="d-flex border-bottom p-3">' +
-                                    '<img class="ml-3" src="$product_image" alt="">' +
-                                    '<div class="d-flex flex-column justify-content-between">' +
-                                    '<a class="search-suggestion" href="$url">' +
-                                    '<span class="suggestion-title">$product_title</span>' +
-                                    '</a>' +
-                                    '</div>' +
-                                    '</li>';
-                                console.log(value.image.path)
-                                li = li.replace("$product_image", value.image.path);
-                                li = li.replace("$product_title", value.product_name);
-                                li = li.replace("$url", 'product/' + value.id);
-                                output += li
-                            });
-
-
-                                $('#searchResponse').html(output);
-                                $("#loader").removeClass('loading');
-                        },
-                        error: function (xhr, ajaxOptions, thrownError) {
-                            // $('#add_to_cart').css("background-color", "red");
-                            // $('#add_to_cart').text("خطایی رخ داده!!!");
-                            // $('#add_to_cart').prop('disabled', true);
-
-                            $("#loader").removeClass('loading');
-                        }
-                    });
-                }
 
             });
         });
