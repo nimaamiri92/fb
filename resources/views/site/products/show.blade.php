@@ -123,10 +123,7 @@
                                             <h2 id="sizeGuideModalTitle">راهنمای انتخاب سایز</h2>
                                         </div>
                                         <div class="col-12">
-                                            <img src="{{ $imageSizeGuide->path }}">
-                                        </div>
-                                        <div class="col-12">
-                                            <img class="w-100" src="../dist/img/size-guide.jpg" alt="">
+                                            <img style="width: 100%" src="{{ $imageSizeGuide->path }}">
                                         </div>
                                     </div>
                                 </div>
