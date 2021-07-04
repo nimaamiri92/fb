@@ -46,7 +46,7 @@
                             <td>{{ $category->name }}</td>
                             <td>{{ $category->order }}</td>
                             <td>{{ $category->type }}</td>
-                            <td>{{ $category->link }}</td>
+                            <td><a href="{{ $category->link }}">{{ $category->name }}</a> </td>
                             @if(optional(($category->parent()->first()))->name)
                                 <td>{{ ($category->parent()->first())->name }}</td>
 
