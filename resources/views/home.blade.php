@@ -42,7 +42,7 @@
                                         @if($featuredProduct->product_discount)
                                             <p>{{$featuredProduct->product_price_discount}}  تومان </p>
                                         @endif
-                                        <p class="@if(!$featuredProduct->discount)d-flex justify-content-between pl-2 @else old-price @endif">{{$featuredProduct->price}} ريال</p>
+                                        <p style="text-decoration: line-through;" class="@if(!$featuredProduct->discount)d-flex justify-content-between pl-2 @else old-price @endif">{{$featuredProduct->price}} ريال</p>
                                     </div>
                                     @if($featuredProduct->product_discount)
                                     <span class="recommendations__item__off-badge">{{$featuredProduct->product_discount}}% تخفیف</span>
