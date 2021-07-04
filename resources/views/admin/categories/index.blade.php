@@ -47,7 +47,12 @@
                             <td>{{ $category->order }}</td>
                             <td>{{ $category->type }}</td>
                             <td>{{ $category->link }}</td>
-                            <td>{{ isset($category->parent_id)? $category->parent()->first()->name : "ندارد" }}</td>
+                            @if(optional(($category->parent()->first()))->name)
+                                <td>{{ ($category->parent()->first())->name }}</td>
+
+                            @else
+                                <td>ندارد</td>
+                            @endif
                             <td>{{ substr($category->description,0,20) }}</td>
                             <td>{{ $category->status == 1 ? "فعال" : "غیرفعال" }}</td>
                             <td>{{ verta($category->created_at)->format('Y-n-j') }}</td>
