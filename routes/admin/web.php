@@ -156,4 +156,8 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('contact-us/{contactUs}/show',[ContactUsController::class,'show'])->name('contact-us-show');
     Route::get('branch/create',[BranchController::class,'create'])->name('branch.create');
     Route::post('branch/store',[BranchController::class,'store'])->name('branch.store');
+    Route::get('branch/index',[BranchController::class,'index'])->name('branch.index');
+    Route::get('branch/{branch}/edit',[BranchController::class,'edit'])->name('branch.edit');
+    Route::patch('branch/{branch}/update',[BranchController::class,'update'])->name('branch.update');
+    Route::delete('branch/{branch}/delete',[BranchController::class,'delete'])->name('branch.delete');
 });
