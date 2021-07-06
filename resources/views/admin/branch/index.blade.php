@@ -3,7 +3,12 @@
 @section('content')
     <section class="content">
         <div class="card">
-            <!-- /.card-header -->
+            <div class="col-md-12">
+                <a href="{{ route('admin.branch.create') }}">
+                    <button type="button"
+                            class="btn float-left btn-primary btn-lg">اضافه کردن شعبه</button>
+                </a>
+            </div>
             <div class="card-body" style="overflow-x: scroll">
                 <br>
                 <table id="example1" class="table table-hover" style="overflow-x: scroll">
@@ -27,10 +32,10 @@
                             <td>{{ $eachData->lat }}</td>
                             <td>{{ $eachData->long }}</td>
                             <td width="20">
-                                    <a class="btn btn-md btn-warning"
-                                       href="{{ route('admin.branch.edit',$eachData->id) }}">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
+                                <a class="btn btn-md btn-warning"
+                                   href="{{ route('admin.branch.edit',$eachData->id) }}">
+                                    <i class="fa fa-edit"></i>
+                                </a>
                             </td>
                             <td width="20">
                                 <form action="{{ route('admin.branch.delete',$eachData->id) }}" method="post">
