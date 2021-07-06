@@ -30,6 +30,8 @@ class OrderRepository extends BaseRepository
                 unset($filter['payment_status']);
             }
         }
+
+//        dd($filter);
         //it is date format,sorry for this type of coding
         //business at the sudden what something!!!!
         if (!empty($filter['search'])){
@@ -40,7 +42,7 @@ class OrderRepository extends BaseRepository
 
         $query->magicQuery(
             $filter,
-            ['relation_user__name','relation_user__mobile','name_of_receiver','address','phone','id','created_at'],
+            ['relation_user__name','relation_user__mobile','name_of_receiver','address','phone','id','created_at','total_order_price'],
             ['created_at', 'id','order_state','payment_status'],
             ['order_state','payment_status']
         );
