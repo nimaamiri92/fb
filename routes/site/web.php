@@ -88,27 +88,19 @@ Route::group(['middleware' => ['auth:site'], 'as' => 'site.'], function () {
         ->name('dashboard.order-history-details');
 });
 
-Route::get('about-us',[HomeController::class,'aboutUs'])->name('site.about-us');
-Route::get('contact-us',[ContactUsController::class,'create'])->name('site.contact-us.create');
-Route::get('branches',[BranchControllers::class,'index'])->name('site.branch.index');
-Route::post('contact-us/store',[ContactUsController::class,'store'])->name('site.contact-us.store');
+Route::get('about-us', [HomeController::class, 'aboutUs'])->name('site.about-us');
+Route::get('contact-us', [ContactUsController::class, 'create'])->name('site.contact-us.create');
+Route::get('branches', [BranchControllers::class, 'index'])->name('site.branch.index');
+Route::post('contact-us/store', [ContactUsController::class, 'store'])->name('site.contact-us.store');
 
 
-Route::get('certificates', function () {
-    return view('site.layouts.certificates');
-})->name('site.certificates');
+Route::get('certificates', [HomeController::class, 'certificate'])->name('site.certificates');
 
-Route::get('help', function () {
-    return view('site.layouts.help');
-})->name('site.help');
+Route::get('help', [HomeController::class, 'help'])->name('site.help');
 
-Route::get('size-guide', function () {
-    return view('site.layouts.size-guide');
-})->name('site.size-guide');
+Route::get('size-guide', [HomeController::class, 'sizeGuide'])->name('site.size-guide');
 
-Route::get('transfer', function () {
-    return view('site.layouts.transfer');
-})->name('site.transfer');
+Route::get('transfer', [HomeController::class, 'transfer'])->name('site.transfer');
 
 
 Route::get('tt', [\App\Http\Controllers\ZahraController::class, 'index']);//dont remove it,its for Zahra

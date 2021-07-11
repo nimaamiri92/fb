@@ -61,5 +61,24 @@ class HomeController extends BaseController
         return view('site.layouts.about-us');
     }
 
+    public function certificate()
+    {
+        return view('site.layouts.certificates');
+    }
+
+    public function help()
+    {
+        return view('site.layouts.help');
+    }
+
+    public function sizeGuide()
+    {
+        return view('site.layouts.size-guide');
+    }
+
+    public function transfer()
+    {
+        return view('site.layouts.transfer');
+    }
 
 }
