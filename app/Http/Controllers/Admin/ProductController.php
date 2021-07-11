@@ -20,6 +20,7 @@ use App\Repositories\Admin\ProductAttributeRepository;
 use App\Repositories\Admin\ProductRepository;
 use App\Tools\InterventionFilters\ImageFilter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -63,6 +64,7 @@ class ProductController extends BaseController
         ProductAttributeRepository $productAttributeRepository,
         CategoryRepository $categoryRepository
     ) {
+        Cache::forget('featured-product');
         $this->productRepository = $productRepository;
         $this->attributeRepository = $attributeRepository;
         $this->attributeValueRepository = $attributeValueRepository;

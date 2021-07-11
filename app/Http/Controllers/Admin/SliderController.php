@@ -9,6 +9,7 @@ use App\Http\Requests\Admin\Sliders\UploadImagesRequest;
 use App\Models\Image;
 use App\Models\Slider;
 use App\Repositories\Admin\SliderRepository;
+use Illuminate\Support\Facades\Cache;
 
 class SliderController extends BaseController
 {
@@ -19,6 +20,7 @@ class SliderController extends BaseController
 
     public function __construct(SliderRepository $sliderRepository)
     {
+        Cache::forget('silder');
         $this->sliderRepository = $sliderRepository;
     }
 

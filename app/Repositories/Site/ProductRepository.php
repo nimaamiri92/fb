@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class ProductRepository extends BaseRepository
@@ -126,14 +127,19 @@ class ProductRepository extends BaseRepository
 
     public function featuredProducts()
     {
-        return $this->model->newQuery()
-            ->where('status', Product::ACTIVE)
-            ->where('featured', Product::ACTIVE)
-            ->with(['attributes'])
-            ->whereHas('attributes', function (Builder $query) {
-                $query->where('quantity', '>', 0);
-            })
-            ->limit(12)->get();
+        if (!Cache::has('featured-product')){
+            $result = $this->model->newQuery()
+                ->where('status', Product::ACTIVE)
+                ->where('featured', Product::ACTIVE)
+                ->with(['attributes'])
+                ->whereHas('attributes', function (Builder $query) {
+                    $query->where('quantity', '>', 0);
+                })
+                ->limit(12)->get();
+            Cache::forever('featured-product',$result);
+        }
+
+        return Cache::get('featured-product');
     }
 
     public function search($keyword)

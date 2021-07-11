@@ -10,6 +10,7 @@ use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class SliderRepository extends BaseRepository
 {
@@ -26,10 +27,10 @@ class SliderRepository extends BaseRepository
     /**
      * List all the
      *
-     * @param bool $paginate
+     * @param bool   $paginate
      * @param string $order
      * @param string $sort
-     * @param array $columns
+     * @param array  $columns
      * @return Collection
      */
     public function list($paginate = true, string $order = 'id', string $sort = 'desc', array $columns = ['*'])
@@ -63,7 +64,7 @@ class SliderRepository extends BaseRepository
     /**
      * Update the slider
      *
-     * @param array $data
+     * @param array  $data
      *
      * @param Slider $slider
      * @return bool
@@ -126,23 +127,26 @@ class SliderRepository extends BaseRepository
     {
         $result[Slider::HOME_MIDDLE] = [];
         $result[Slider::HOME_TOP] = [];
+        if (!Cache::has('silder')) {
 
-        $sliders = $this
-            ->model
-            ->newQuery()
-            ->select([
-                'link',
-                'id',
-                'section',
-            ])
-            ->where('status', Slider::ACTIVE)
-            ->get();
 
-        foreach ($sliders as $key => $slide){
-            array_push($result[$slide->section], ['link' => $slide->link,'image' => $slide->image]);
+            $sliders = $this
+                ->model
+                ->newQuery()
+                ->select([
+                    'link',
+                    'id',
+                    'section',
+                ])
+                ->where('status', Slider::ACTIVE)
+                ->get();
+
+            foreach ($sliders as $key => $slide) {
+                array_push($result[$slide->section], ['link' => $slide->link, 'image' => $slide->image]);
+            }
+            Cache::forever('slider', $result);
         }
 
-        return $result;
-//        dd(\Spatie\Once\Cache::);
+        return Cache::get('slider');
     }
 }

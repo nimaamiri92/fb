@@ -15,6 +15,7 @@ use App\Http\Requests\Admin\Categories\UploadImagesRequest;
 use App\Models\Category;
 use App\Models\Image;
 use App\Repositories\Admin\CategoryRepository;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * @property CategoryRepository $categoryRepository
@@ -27,6 +28,7 @@ class CategoryController extends BaseController
      */
     public function __construct(CategoryRepository $categoryRepository)
     {
+        Cache::forget('menu');
         $this->categoryRepository = $categoryRepository;
     }
 
