@@ -10,21 +10,15 @@ class MenuComposer
 {
     public function compose(View $view)
     {
-
-        return              $view->with('menus', Category::with(['children' => function($query){
-            $query->orderBy('order', 'asc');
-        }])
-            ->whereIn('type', [Category::MENU])
-            ->where('status', Category::ACTIVE)
-            ->orderBy('order', 'asc')
-            ->get());
         if (Cache::has('menu')) {
             return Cache::get('menu');
         }
 
 
         Cache::remember('menu', 3600, function () use ($view) {
-            $view->with('menus', Category::with('children')
+            $view->with('menus', Category::with(['children' => function($query){
+                $query->orderBy('order', 'asc');
+            }])
                 ->whereIn('type', [Category::MENU])
                 ->where('status', Category::ACTIVE)
                 ->orderBy('order', 'asc')
