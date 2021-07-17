@@ -39,7 +39,7 @@ class CategoryController extends BaseController
     {
         $this->setPageTitle(trans('categories.name'));
         $this->setSideBar('categories');
-        $categories = $this->categoryRepository->list(true,'updated_at');
+        $categories = $this->categoryRepository->list(true);
         return view('admin.categories.index', compact('categories'));
     }
 

@@ -70,7 +70,9 @@ class Category extends BaseModel
         return $this
             ->hasMany(Category::class, 'parent_id', 'id')
             ->where('type',self::MENU)
-            ->with('children');
+            ->with(['children' => function($query){
+                $query->orderBy('order', 'asc');
+            }]);
     }
 
     public function parent()
