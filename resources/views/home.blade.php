@@ -82,11 +82,10 @@
             <div class="col-12 mb-2">
                 <div class="favorites">
                     <div id="patterns-list" class="owl-carousel patterns-list">
-{{--                        @dd($brands->toarray())--}}
                         @foreach($brands as $brand)
                         <div class="d-flex justify-content-center patterns-list__item">
                                 <img src="{{ optional($brand)->image }}" alt="">
-                                <a class="patterns-list__item__title" href="">{{$brand->name}}</a>
+                                <a class="patterns-list__item__title" href="{{$brand->link}}">{{$brand->name}}</a>
                         </div>
                         @endforeach
                     </div>
