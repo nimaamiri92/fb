@@ -208,7 +208,7 @@
                                     @endforeach
                                 </ul>
 
-                                <a class="center add-to-favorite d-flex align-items-center mb-3">
+                                <a class="center add-to-favorite d-flex align-items-center mb-3" href="{{ route('site.addresses.create') }}">
                                     <i class="fas fa-plus ml-3"></i>
                                     افزودن آدرس جدید
                                 </a>
