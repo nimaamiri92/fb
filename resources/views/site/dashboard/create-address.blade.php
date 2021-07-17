@@ -106,7 +106,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                                     @enderror
-                                    <label for="" class="form-check-label mr-2">
+                                    <label  for="" class="form-check-label mr-2">
                                         استفاده به عنوان آدرس پیش فرض
                                     </label>
                                 </div>

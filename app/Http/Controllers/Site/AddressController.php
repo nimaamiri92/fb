@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\Admin\Users\BranchRequest;
-use App\Http\Requests\Admin\Users\UpdateAddressRequest;
+use App\Http\Requests\Site\Address\AddressRequest;
+use App\Http\Requests\Site\Address\UpdateAddressRequest;
 use App\Models\Address;
 use App\Models\Site\User;
 use App\Repositories\Admin\UserRepository;
@@ -52,7 +52,7 @@ class AddressController extends BaseController
         return view('site.dashboard.create-address');
     }
 
-    public function store(BranchRequest $request)
+    public function store(AddressRequest $request)
     {
         $data = $request->validated();
         $user = currentUserObj();
@@ -88,8 +88,10 @@ class AddressController extends BaseController
         $this->setCartContent();
         DB::transaction(function () use ($data, $address) {
             $user = currentUserObj();
-            if ($data['is_default']) {
-                $user->addresses()->where('is_default', 1)->update(['is_default' => 0]);
+            if (!empty($addressData['is_default'])){
+                $user->addresses()->update([
+                    'is_default' => 0
+                ]);
             }
             $address->update($data);
         });

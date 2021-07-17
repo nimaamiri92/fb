@@ -32,6 +32,11 @@ class UserRepository extends BaseRepository
 
     public function saveUserAddress($user, $addressData)
     {
+        if (!empty($addressData['is_default'])){
+            $user->addresses()->update([
+                'is_default' => 0
+            ]);
+        }
         $user->addresses()->save(new Address($addressData));
     }
 }
