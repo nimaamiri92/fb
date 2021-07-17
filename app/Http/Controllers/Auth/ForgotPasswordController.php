@@ -31,7 +31,7 @@ class ForgotPasswordController extends BaseController
 
     public function sendResetLink(ForgotPasswordRequest $request)
     {
-        $this->dispatch(new SendResetPasswordSmsJob($request->get('mobile')));
+        SendResetPasswordSmsJob::dispatch($request->get('mobile'))->onConnection('sync');
         return redirect()->route('password.reset.sentSuccessfully');
     }
 
