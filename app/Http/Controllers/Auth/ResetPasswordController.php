@@ -35,7 +35,7 @@ class ResetPasswordController extends BaseController
     public function showResetForm()
     {
         $this->setPageTitle('بازنشانی رمز ورود');
-        sleep(10);//let mysql sync read and write PDO
+        sleep(5);//let mysql sync read and write PDO
         return view('site.auth.reset');
     }
 
