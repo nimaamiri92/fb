@@ -38,8 +38,8 @@
                                         <div class="form-group">
                                             <label>{{ trans('sliders.section') }}</label>
                                             <select name="section" id="">
-                                                <option value="{{ \App\Models\Slider::HOME_MIDDLE }}">عکس دختر و پسر</option>
-                                                <option value="{{ \App\Models\Slider::HOME_TOP }}">اسلایدر</option>
+                                                <option @if($slider->section == \App\Models\Slider::HOME_MIDDLE) selected @endif value="{{ \App\Models\Slider::HOME_MIDDLE }}">عکس دختر و پسر</option>
+                                                <option @if($slider->section == \App\Models\Slider::HOME_TOP) selected @endif value="{{ \App\Models\Slider::HOME_TOP }}">اسلایدر</option>
                                             </select>
                                             @error('section')
                                             <span class="invalid-feedback validation-error" role="alert">

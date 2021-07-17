@@ -67,7 +67,7 @@ class SliderRepository extends BaseRepository
     }
 
 
-    public function updateSlider(array $attributes, Slider $slider): bool
+    public function updateSlider(array $attributes, Slider $slider)
     {
         try {
             $this->update($attributes,$slider->id);
