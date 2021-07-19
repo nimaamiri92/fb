@@ -10,7 +10,6 @@ use App\Repositories\Site\CartRepository;
 use App\Repositories\Site\OrderRepository;
 use App\Repositories\Site\ShipmentRepository;
 use App\Services\Site\OrderService;
-use App\Services\Site\PaymentService;
 
 class OrderController extends BaseController
 {
@@ -36,36 +35,31 @@ class OrderController extends BaseController
      */
     private $orderRepository;
 
-    /**
-     * @var PaymentService
-     */
-    private $paymentService;
 
     public function __construct(
         OrderService $orderService,
         CartRepository $cartRepository,
         ShipmentRepository $shipmentRepository,
         AddressRepository $addressRepository,
-        OrderRepository $orderRepository,
-        PaymentService $paymentService
+        OrderRepository $orderRepository
     ) {
         $this->orderService = $orderService;
         $this->cartRepository = $cartRepository;
         $this->addressRepository = $addressRepository;
         $this->shipmentRepository = $shipmentRepository;
         $this->orderRepository = $orderRepository;
-        $this->paymentService = $paymentService;
     }
 
     public function createOrderAndGoToGateway(CreateOrderRequest $request)
     {
         $cartData = $this->cartRepository->show();
 
+        //check user has item in cart
         if (empty($cartData['cartId'])) {
             return back()->withErrors([]);
         }
 
-        //check user doesn't have any out of stock product in cart
+        //check user have any out_of_stock product in cart( in case of race condition on bank gateway)
         if (!$this->orderService->checkOrderHasEnoughEntity($cartData['listOfProducts'])) {
             return back()->withErrors([
                 'product_entity' => [trans('validation.remove_out_of_stack')]
@@ -75,7 +69,9 @@ class OrderController extends BaseController
         $addressData = $this->getAddressData($request);
         $shipmentData = $this->getShipmentData($request);
 
+        //create initial order before sending user to gateway payment
         $payment = $this->orderService->createOrderAndGetInitialPaymentData($cartData, $addressData, $shipmentData);
+        //here we send user to bank gateway
         return $payment->pay()->render();
     }
 

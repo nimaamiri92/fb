@@ -32,6 +32,7 @@ class CartRepository extends BaseRepository
      */
     public function show()
     {
+
         $cart = Cart::query()->where([
             'user_id' => currentUserObj()->id,
             'status' => Cart::ACTIVE
@@ -42,6 +43,7 @@ class CartRepository extends BaseRepository
         $totalPriceWithDiscount = 0;
         $totalPriceWithoutDiscount = 0;
 
+        //if user has items in cart get all items in cart and parse it
         if ($cart) {
             $cartItems = $cart->cartItems()->with([
                 'productAttribute',
@@ -60,8 +62,8 @@ class CartRepository extends BaseRepository
                 $listOfProducts[$eachItem->id]['quantity'] = $eachItem->quantity;
                 $listOfProducts[$eachItem->id]['has_enough_entity'] = !$eachItem->has_enough_entity_in_stock;
                 $listOfProducts[$eachItem->id]['zero_entity'] = $eachItem->zero_entity_in_stock;
-                $totalPriceWithDiscount += (int) round($listOfProducts[$eachItem->id]['product_price_discount']) * $listOfProducts[$eachItem->id]['quantity'];
-                $totalPriceWithoutDiscount += (int) round($listOfProducts[$eachItem->id]['product_price']) * $listOfProducts[$eachItem->id]['quantity'];
+                $totalPriceWithDiscount += (int)round($listOfProducts[$eachItem->id]['product_price_discount']) * $listOfProducts[$eachItem->id]['quantity'];
+                $totalPriceWithoutDiscount += (int)round($listOfProducts[$eachItem->id]['product_price']) * $listOfProducts[$eachItem->id]['quantity'];
             }
         }
 
@@ -79,7 +81,7 @@ class CartRepository extends BaseRepository
         $cart = getUserCurrentCart();
         $cart->status = $status;
         if ($cart->save()) {
-            //remove count of product cache in cart
+            //remove count of product cache in cart(we save item in cart in cache for each user)
             Cache::forget('items_count_' . currentUserObj()->id);
         }
     }
@@ -91,17 +93,10 @@ class CartRepository extends BaseRepository
             ->cartItems()
             ->where('id', $cartItem->id)
             ->increment('quantity', $quantity);
+
+        //we remove cart items in cache and force to read it again form database and cache it again
         Cache::forget('items_count_' . currentUserObj()->id);
-        $cartItemData = $this->model->newQuery()
-            ->findOrFail($cart->id)
-            ->cartItems()
-            ->where('id', $cartItem->id)
-            ->with(['productAttribute:id,quantity'])
-            ->get([
-                'cart_id',
-                'quantity',
-                'product_attribute_id',
-            ]);
+
 
         return collect([
             '1' => 1

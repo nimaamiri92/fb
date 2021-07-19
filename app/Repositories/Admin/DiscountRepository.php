@@ -34,6 +34,10 @@ class DiscountRepository extends BaseRepository
     }
 
 
+    /*
+     * we use polymorphic for discount,because we have multi type discount
+     * discount on products or discount on Brands
+     * */
     public function createDiscount(array $data)
     {
         $discountObjList = [];
@@ -48,7 +52,7 @@ class DiscountRepository extends BaseRepository
         array_push($discountObjList, $discountObj);
         }
 
-        /*build morphable_type object,it can be Product or Category*/
+        /*build morphable_type object,it can be Product or brand(category)*/
         (new $data['type'])
             ->whereIn('id', $data['discountable_id'])
             ->first()

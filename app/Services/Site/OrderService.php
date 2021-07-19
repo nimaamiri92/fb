@@ -67,19 +67,26 @@ class OrderService
             $order->total_order_price = $cartData['totalPriceWithDiscount'] + $shipmentData->price;
             $order->payment_status = PaymentModel::FAIL_PAYMENT;
             $order->save();
+
+            //convert cart items to order items
             $order->orderItems()->saveMany(
                  $this->generateOrderItemsData($cartData['listOfProducts'])
             );
 
+            //create initial payment log
             $payment = $this->createPayment($order);
 
+            //here we clean current user cart items(only cart with active status allow to show user)
             $this->cartRepository->changeCartStatus(Cart::GO_FOR_PAYMENT);
 
+            //before send user to payment we decrement each product quantity
             foreach ($cartData['listOfProducts'] as $eachCartItem) {
                 ProductAttribute::query()->where('id', $eachCartItem['product_attribute_id'])->decrement('quantity', $eachCartItem['quantity']);
             }
-
-            RemoveStockEntityBaseOnTheOrderJob::dispatch($cartData)->delay(now()->addMinutes(15));
+            //Here we allow user to pay order in certain time(base on the bank gateway,each payment allow to be pay in only 15 minutes
+            //if user go to payment and didn't come back with successful payment
+            //we increase that order product quantity(return product quantity)
+            RemoveStockEntityBaseOnTheOrderJob::dispatch($cartData)->delay(now()->addMinutes(17));
 
             DB::commit();
         } catch (Exception $exception) {

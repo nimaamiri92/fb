@@ -52,18 +52,20 @@ class ProductController extends BaseController
 
     public function index(productListRequest $request)
     {
-        $data['gender'] = [];
-        $data['category'] = [];
-        $data['size'] = [];
-        $data['brand'] = [];
-        $data['page'] = $request->get('page');
+        $filters['gender'] = [];
+        $filters['category'] = [];
+        $filters['size'] = [];
+        $filters['brand'] = [];
+        $filters['page'] = $request->get('page');
 
-        $data = array_merge($data, $request->validated());
+        $filters = array_merge($filters, $request->validated());
         $this->setPageTitle('محصولات');
         $this->setCartContent();
 
-        $products = $this->productRepository->listOfProduct($data);
+        //get list products with filters
+        $products = $this->productRepository->listOfProduct($filters);
 
+        //list of product also can return json response
         if ($request->has('api')) {
             return response()->json([
                 'data' => $products,
@@ -73,9 +75,9 @@ class ProductController extends BaseController
 
         $categories = $this->categoryRepository->getPluckAllCategory();
         $brands = $this->categoryRepository->getPluckAllBrand();
-        $attributes = $this->attributeRepository->getListOfAttributesWithValues();
+        $attributes = $this->attributeRepository->getActiveListOfAttributesWithValues();
 
-        return view('site.products.index', compact('data', 'products', 'attributes', 'categories', 'brands'));
+        return view('site.products.index', compact('filters', 'products', 'attributes', 'categories', 'brands'));
     }
 
     public function show(Product $product)

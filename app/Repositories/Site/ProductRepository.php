@@ -88,41 +88,6 @@ class ProductRepository extends BaseRepository
         $hasQuantity = $products->where('has_quantity', true);
         $products = $hasQuantity->concat($hasNotQuantity);
         return $products->paginate(15, $products->count(), $filters['page'] ?? 1);
-
-
-        //order by somethings
-
-//
-//        $products = Product::query();
-//        $products = $products->select(['*',DB::raw('sum(product_attributes.quantity) as all_quantity')]);
-//        $products = $products->join('product_attributes','product_attributes.product_id','=','products.id');
-//        $products = $products->groupBy('product_id');
-//        $products->with(['images','discount']);
-//        $products->whereHas('categories', function ($query) use ($data) {
-//            //for filtering category
-//            if ($data['category']) {
-//                $query->where('categories.id', $data['category']);
-//            }
-//
-//            if ($data['brand']) {
-//                $query->WhereIn('categories.id', $data['brand']);
-//            }
-//        });
-//        $products->whereHas('attributes.attributesValues', function ($query) use ($data) {
-//            //for filtering size
-//            if ($data['size']) {
-//                $query->whereIn('id', $data['size']);
-//            }
-//        });
-//
-//        if ($data['gender']) {
-//            $products->whereIn('gender', $data['gender']);
-//        }
-//
-//
-//        $products = $products->orderBy('products.id','DESC');
-//dd($products->get()->toArray());
-//        return $products->forPage($data['page'] ?? 1 ,15);
     }
 
     public function featuredProducts()

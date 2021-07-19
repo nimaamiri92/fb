@@ -11,7 +11,6 @@ class BankGateway
     {
         switch ($defaultGateway) {
             case 'behpardakht':
-
                 $paymentLog = self::getPaymentLog($transactionResult['RefId']);
                 $gatewayInstance = new Behpardakht($paymentLog, $transactionResult);
                 break;
@@ -20,7 +19,8 @@ class BankGateway
                 $gatewayInstance = new Zarinpal();
                 break;
             default:
-                $gatewayInstance = new Behpardakht;
+                $paymentLog = self::getPaymentLog($transactionResult['RefId']);
+                $gatewayInstance = new Behpardakht($paymentLog, $transactionResult);;
                 break;
         }
 

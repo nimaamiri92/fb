@@ -14,7 +14,9 @@ class CartService
     public function addToCart(Product $product, int $quantity, $productAttribute)
     {
         $attributes = [];
-        $product = $product->load(['images','attributes.attributesValues','attributes'=> function ($query) use ($productAttribute) {
+        $product = $product->load(['images', 'attributes.attributesValues', 'attributes' => function ($query) use (
+            $productAttribute
+        ) {
             $query->where('id', $productAttribute);
         }]);
 
@@ -41,11 +43,13 @@ class CartService
 
     /**
      * @param Product $product
-     * @param array $attributes
-     * @param int $quantity
+     * @param array   $attributes
+     * @param int     $quantity
      */
     public function addToCartWhenUserNotLogin(Product $product, array $attributes, int $quantity): void
     {
+        //for adding product to cart,we use package you can find it composer.json and read thier doc in github
+        //we need unique id for save cart in cache
         $uniqueId = $this->generateUniqueId($product);
         $name = $product->product_name;
         $price = $product->product_price_discount;
@@ -65,7 +69,7 @@ class CartService
 
     /**
      * @param Product $product
-     * @param int $quantity
+     * @param int     $quantity
      */
     public function addToCartWhenUserWasLogin(Product $product, int $quantity): void
     {

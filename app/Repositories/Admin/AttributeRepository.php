@@ -102,7 +102,7 @@ class AttributeRepository extends BaseRepository
         return $this->model->values()->save($attributeValue);
     }
 
-    public function getListOfAttributesWithValues()
+    public function getActiveListOfAttributesWithValues()
     {
         return $this->model->with(['values' => function ($query) {
             $query->where(['is_show' => 1]);

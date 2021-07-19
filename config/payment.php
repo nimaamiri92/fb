@@ -44,7 +44,7 @@ return [
             'terminalId' => '1987903',
             'username' => 'bcc73',
             'password' => '99863608',
-            'callbackUrl' => 'https://xxx.bccstyle.com/payment/callback',
+            'callbackUrl' => 'https://bccstyle.com/payment/callback',
             'description' => 'payment using behpardakht',
         ],
         'idpay' => [

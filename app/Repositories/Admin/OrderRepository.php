@@ -20,6 +20,7 @@ class OrderRepository extends BaseRepository
             ->newQuery()
             ->with('user');
 
+        //here if admin user filter orders by order status and want to return to state that all orders to show
         if (!empty($filter['order_state'])){
             if ($filter['order_state'] === "EMPTY"){
                 unset($filter['order_state']);
@@ -31,15 +32,17 @@ class OrderRepository extends BaseRepository
             }
         }
 
-//        dd($filter);
         //it is date format,sorry for this type of coding
-        //business at the sudden what something!!!!
+        //business at the sudden want something!!!!
+        //here we check if admin user search in order by date
         if (!empty($filter['search'])){
             if (count(explode('/',$filter['search'])) > 2){
                 $filter['search'] = convertToGregorian(explode('/',$filter['search']))->format('Y-m-d');
             }
         }
 
+        //for understand to what happen below you need to read `app/tools/filterModel` directory
+        //here we search,sort,filter on object and their relations
         $query->magicQuery(
             $filter,
             ['relation_user__name','relation_user__mobile','name_of_receiver','address','phone','id','created_at','total_order_price'],

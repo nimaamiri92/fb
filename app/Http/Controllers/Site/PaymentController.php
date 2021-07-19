@@ -24,6 +24,7 @@ class PaymentController extends BaseController
         $transactionResult = $request->all();
 
         $defaultGateway = getDefaultBankGateway();
+        //here is strategy pattern for adding more payment methods in future
         $result = BankGateway::getInstance($defaultGateway, $transactionResult)->verify();
 
         if ($result->status){

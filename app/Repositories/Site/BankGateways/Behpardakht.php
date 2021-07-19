@@ -34,6 +34,7 @@ class Behpardakht
     {
         $result = new \stdClass();
         try {
+            //here either have fail payment or success we save payment log
             $this->savePaymentLog();
 
             DB::beginTransaction();
@@ -112,6 +113,7 @@ class Behpardakht
     private function savePaymentLog(): void
     {
         $this->paymentLog->res_code = $this->transactionResult['ResCode'];
+        //translate bank status code to persian status
         $this->paymentLog->res_string = translateBehpardakhtErrorMessage($this->transactionResult['ResCode']);
         $this->paymentLog->sale_order_id = $this->transactionResult['SaleOrderId'];
         $this->paymentLog->sale_reference_id = !empty($this->transactionResult['SaleReferenceId']) ? $this->transactionResult['SaleReferenceId'] : Null;
