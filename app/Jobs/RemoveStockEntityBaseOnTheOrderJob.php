@@ -35,12 +35,12 @@ class RemoveStockEntityBaseOnTheOrderJob implements ShouldQueue
      */
     public function handle()
     {
-        $cart =Cart::query()
+        $cart = Cart::query()
             ->where('id', $this->cartData['cartId'])
-            ->whereNotIn('status',[Cart::PAID])
+            ->whereNotIn('status', [Cart::PAID])
             ->first();
 
-        if (!empty($cart->id)){
+        if (!empty($cart->id)) {
             $cartItems = $cart->cartItems()->get();
 
             foreach ($cartItems as $cartItem) {

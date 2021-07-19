@@ -10,6 +10,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
+//get user a instance of thier cart
 if (!function_exists('cart')) {
     function cart()
     {
@@ -21,14 +22,12 @@ if (!function_exists('cart')) {
     }
 }
 
-/**
- * if user has saved cart in database that is not converted to order we return it as currentCart
- */
+
 if (!function_exists('getUserCurrentCart')) {
-    function getUserCurrentCart() : CartModel
+    function getUserCurrentCart(): CartModel
     {
         //if user has unfinished cart we return it,and do not create new cart for him
-        $cart = CartModel::query()->where(['user_id'=> currentUserObj()->id,'status' => CartModel::ACTIVE])->latest()->first();
+        $cart = CartModel::query()->where(['user_id' => currentUserObj()->id, 'status' => CartModel::ACTIVE])->latest()->first();
 
         if (!$cart) {
             $cart = new CartModel();
@@ -40,7 +39,7 @@ if (!function_exists('getUserCurrentCart')) {
     }
 }
 
-
+//get current user data
 if (!function_exists('currentUserObj')) {
     /**
      * @return User|null
@@ -64,7 +63,7 @@ if (!function_exists('translateBehpardakhtErrorMessage')) {
     function translateBehpardakhtErrorMessage($code)
     {
         $translations = [
-            0=> 'تراکنش با موفقیت انجام شد',
+            0 => 'تراکنش با موفقیت انجام شد',
             11 => 'شماره کارت نامعتبر است',
             12 => 'موجودی کافی نیست',
             13 => 'رمز نادرست است',
@@ -120,8 +119,8 @@ if (!function_exists('translateBehpardakhtErrorMessage')) {
 if (!function_exists('convertArabicCharacters')) {
     function convertArabicCharacters($phrase)
     {
-        $arabic_characters = ['أ','إ','ك','ؤ','ة','ۀ','ي','٠',';','?',','];
-        $persian_characters = ['ا','ا','ک','و','ه','ه','ی','۰','؛','؟','،'];
+        $arabic_characters = ['أ', 'إ', 'ك', 'ؤ', 'ة', 'ۀ', 'ي', '٠', ';', '?', ','];
+        $persian_characters = ['ا', 'ا', 'ک', 'و', 'ه', 'ه', 'ی', '۰', '؛', '؟', '،'];
 
         return str_replace($arabic_characters, $persian_characters, $phrase);
     }
@@ -168,14 +167,14 @@ if (!function_exists('convertToJalali')) {
 }
 if (!function_exists('s3')) {
     /**
-    * @return S3Client
+     * @return S3Client
      */
     function s3()
     {
         /**
-         * @var S3Client  $s3
+         * @var S3Client $s3
          */
-        $s3 =  AwsFacade::createClient('s3');
+        $s3 = AwsFacade::createClient('s3');
         return $s3;
     }
 }
@@ -195,7 +194,8 @@ if (!function_exists('redirect_now')) {
     }
 }
 
-
+//beacuse we move user data from previuos database and previous website has been writen by YII2,
+//yii2 use diffrent method to hash password we can use this function to find out user has correct password base on yii2 hashing
 if (!function_exists('yii2PasswordChecker')) {
     function yii2PasswordChecker($username, $password)
     {

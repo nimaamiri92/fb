@@ -24,7 +24,7 @@ class Migration extends Command
 {
     protected $signature = 'migrate:data';
 
-    protected $description = 'Command description';
+    protected $description = 'dont run this command,it just move data from previous website to current website';
     private $mapCategory;
     private $mapBrand;
 

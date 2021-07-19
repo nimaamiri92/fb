@@ -8,6 +8,9 @@ return [
     'pagination' => [
         'per_page' => 10
     ],
+    'sms_token' =>  '9bQPFjT8P/UB3mhGOJGYO0/aASU/STCCZ1lk+ECNvq0',
+    'sms_sender' =>  '30005066962957',
+    'sms_url' =>  'http://api.smsapp.ir/v2/sms/send/simple',
     'files' => [
         'size' => [
             Product::class => [
