@@ -18,7 +18,7 @@ class MergeLocalCartWithDatabaseCartListener
     {
     }
 
-
+    //on the login we fire this event to calculate user cart item,from previous login
     public function handle($event)
     {
         try {

@@ -13,6 +13,7 @@ class Slider extends BaseModel
     const ACTIVE = 1;
     const INACTIVE = 0;
 
+    //we handle slider and also 2 image in middle of home page(girl and boy image)
     const HOME_MIDDLE = 'home_page_middle_static_photos';
     const HOME_TOP = 'home_page_top_slider';
 

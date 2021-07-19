@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Config;
 
 class SendSms implements ShouldQueue
 {
@@ -27,13 +28,13 @@ class SendSms implements ShouldQueue
 
     public function handle()
     {
-        (new Client)->request('POST', 'http://api.smsapp.ir/v2/sms/send/simple', [
+        (new Client)->request('POST', Config::get('custom_config.sms_url'), [
             'headers' => [
-                'apikey' => '9bQPFjT8P/UB3mhGOJGYO0/aASU/STCCZ1lk+ECNvq0'
+                'apikey' => Config::get('custom_config.sms_token')
             ],
             'json' => [
                 'message' => $this->message,
-                'sender' => '30005066962957',
+                'sender' => Config::get('custom_config.sms_sender'),
                 'Receptor' => $this->mobileNumber,
             ]
         ]);
