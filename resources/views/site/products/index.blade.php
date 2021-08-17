@@ -42,7 +42,7 @@
                                     <ul class="list-unstyled my-3">
                                         @foreach($categories as $key => $category)
                                             <li class="d-flex align-items-center mt-3">
-                                                <input @if($key == $data['category']) checked
+                                                <input @if($key == $filters['category']) checked
                                                        @endif class="on_change_submit" type="radio" id="{{ "category_" . $key }}"
                                                        name="category"
                                                        value="{{ $key }}">
@@ -62,7 +62,7 @@
                                     <ul class="list-unstyled my-3">
                                         @foreach(\App\Models\Product::GENDER as $key => $gender)
                                             <li class="d-flex align-items-center mt-3">
-                                                <input @if(in_array($key,$data['gender'])) checked
+                                                <input @if(in_array($key,$filters['gender'])) checked
                                                        @endif class="on_change_submit" type="checkbox"
                                                        id="{{"gender".$key}}" name="gender[]" value="{{ $key }}">
                                                 <label for="{{"gender".$key}}" class="mb-0 mr-3">{{ $gender }}</label>
@@ -84,7 +84,7 @@
                                         @foreach($attributes->first()->values as $eachValue)
                                             <li class="d-flex align-items-center mt-3">
                                                 <input class="on_change_submit" id="{{ "size_" . $eachValue->id }}"
-                                                       @if(in_array($eachValue->id,$data['size'])) checked @endif
+                                                       @if(in_array($eachValue->id,$filters['size'])) checked @endif
                                                        type="checkbox" name="size[]"
                                                        value="{{ $eachValue->id }}">
                                                 <label for="{{ "size_" . $eachValue->id }}"
@@ -103,7 +103,7 @@
                                 <div id="colorFilter" class="collapse" data-parent="#filters">
                                     @foreach($brands as $key => $brand)
                                         <li class="d-flex align-items-center mt-3">
-                                            <input class="on_change_submit" @if(in_array($key,$data['brand'])) checked
+                                            <input class="on_change_submit" @if(in_array($key,$filters['brand'])) checked
                                                    @endif type="checkbox" id="{{"brand_".$key}}" name="brand[]"
                                                    value="{{ $key }}">
                                             <label for="{{"brand_".$key}}" class="mb-0 mr-3">{{ $brand }}</label>
