@@ -122,9 +122,11 @@
                                         <div class="col-12">
                                             <h2 id="sizeGuideModalTitle">راهنمای انتخاب سایز</h2>
                                         </div>
-                                        <div class="col-12">
-                                            <img style="width: 100%" src="{{ $imageSizeGuide->path }}">
-                                        </div>
+                                        @if(!empty($imageSizeGuide))
+                                            <div class="col-12">
+                                                <img style="width: 100%" src="{{ $imageSizeGuide->path }}">
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
