@@ -19,7 +19,7 @@
                             <label class="required" for="reg-lastname">
                                 نام و نام خانوادگی
                             </label>
-                            <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" name="name" id="reg-lastname" required>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" name="name" id="reg-lastname" >
                             @error('name')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -30,7 +30,7 @@
                             <label class="required" for="reg-phone">
                                 موبایل
                             </label>
-                            <input type="text" id="mobile" class="form-control @error('mobile') is-invalid @enderror" value="{{ old('mobile') }}" name="mobile" id="reg-phone" required>
+                            <input type="text" id="mobile" class="form-control @error('mobile') is-invalid @enderror" value="{{ old('mobile') }}" name="mobile" id="reg-phone" >
                             @error('mobile')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -57,7 +57,7 @@
                             <label class="required" for="reg-pass">
                                 رمز عبور
                             </label>
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" name="password" id="reg-pass" required>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" name="password" id="reg-pass" >
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -69,7 +69,7 @@
                                 تکرار رمز عبور
                             </label>
                             <input type="password" class="form-control" name="password_confirmation" id="reg-repass"
-                                   required>
+                                   >
                         </div>
                     </section>
                     <div class="d-flex justify-content-start flex-column flex-md-row mt-5">
